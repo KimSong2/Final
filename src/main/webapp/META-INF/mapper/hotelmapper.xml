@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goodee.dao.HotelDAO">
+	<select id="selectRanHotel" resultType="hotelVO">
+	select hotel_id, hotel_name, hotel_addr, hotel_category, hotel_tel, hotel_thum, hotel_img
+		from hotel_info
+		where hotel_id in 
+		<foreach item="ran" index="id" collection="ran" open="(" separator="," close = ")">
+			 #{ran} 
+		</foreach>
+	</select>
+	<!-- 지역구 값 받아서 해당 정보 출력 -->
+	<select id="selectHotelList" resultType="hotelVO">
+	select hotel_id, hotel_name, hotel_addr, hotel_category, hotel_tel, hotel_thum, hotel_img
+		from hotel_info
+		where hotel_category in 
+		<foreach item="cate" index="id" collection="list" open="(" separator="," close = ")">
+			 #{cate} 
+		</foreach>
+		
+	</select>
+	
+	<select id="selectroom" resultType="hotelroomVO">
+		 SELECT room_type, room_name, room_id, h.hotel_id, h.hotel_name, room_price, room_content
+		FROM hotel_info h INNER JOIN hotel_room r
+		ON h.hotel_id = r.hotel_id
+		WHERE r.hotel_id IN 
+		<foreach item="hotelid" collection="hotelid" open="(" separator="," close = ")">
+			 #{hotelid} 
+		</foreach> 
+		GROUP BY room_type,h.hotel_id
+		ORDER BY room_id;
+	</select>
+	
+	<select id="selectRoomImg" resultType="hoteljoinVO">
+		SELECT hi.hotel_id, hi.hotel_name, hr.room_id, hr.room_type, hr.room_price, hri.img_id, hri.room_img FROM hotel_info AS hi INNER JOIN hotel_room AS hr ON hi.hotel_id = hr.hotel_id
+		INNER JOIN hotel_room_img AS hri ON hr.room_id = hri.room_id
+		WHERE hi.hotel_id in
+		<foreach item="hotelid" collection="hotelid" open="(" separator="," close = ")">
+			 #{hotelid} 
+		</foreach> 
+	</select>
+	
+	<select id="detailRoomId" resultType="hoteldetailresVO">
+		SELECT distinct room_id FROM hotel_detail_res WHERE (res_start &lt; #{enddate} AND res_end &gt; #{startdate}) AND res_status = '예약 완료';
+	</select>
+
+	<select id="detailHotelRoom" resultType="hoteljoinVO">
+		select hi.hotel_id, hi.hotel_name, hi.hotel_addr, hi.hotel_category, hi.hotel_tel, hi.hotel_thum, hr.room_id, hr.room_name, hr.room_type, hr.room_price, hr.room_content from hotel_info as hi
+		INNER JOIN hotel_room as hr ON hr.hotel_id = hi.hotel_id
+			where hi.hotel_id = #{hotelId} and NOT hr.room_id in
+		<foreach item="items" collection="roomId" open="(" separator="," close = ")">
+			#{items}
+		</foreach> 
+	</select>
+	
+	<select id="detailHotelnotRoomid" resultType="hoteljoinVO">
+		select hi.hotel_id, hi.hotel_name, hi.hotel_addr, hi.hotel_category, hi.hotel_tel, hi.hotel_thum, hr.room_id, hr.room_name, hr.room_type, hr.room_price, hr.room_content from hotel_info as hi
+		INNER JOIN hotel_room as hr ON hr.hotel_id = hi.hotel_id
+			where hi.hotel_id = #{hotelId}
+	</select>
+	
+	
+	
+	
+	<select id="getHotelReview" resultType="hotelreviewVO">
+		select * from hotelreview where hotel_id = #{hotelId} and is_delete = 0 order by hotelreview_date desc limit 0, 5
+	</select>
+	<select id="getHotelReviewCount" resultType="int">
+		select count(*) from hotelreview where hotel_id = #{hotelId} and is_delete = 0
+	</select>
+	<select id="getMoreHotelReview" resultType="hotelreviewVO">
+		select * from hotelreview where hotel_id = #{hotelId} and is_delete = 0 order by hotelreview_date desc limit #{page}, 5;
+	</select>
+	
+	<select id="getHotelQna" resultType="hotelqnaVO">
+		select * from hotelqna where hotel_id = #{hotelId} and is_delete = 0 order by hotelqna_date desc limit 0, 5;
+	</select>
+	<select id="getHotelQnaCount" resultType="int">
+		select count(*) from hotelqna where hotel_id = #{hotelId} and is_delete = 0
+	</select>
+	<select id="getMoreHotelQna" resultType="hotelqnaVO">
+		select * from hotelqna where hotel_id = #{hotelId} and is_delete = 0 order by hotelqna_date desc limit #{page}, 5;
+	</select>
+	<insert id="insertHotelReview" parameterType="hotelreviewVO">
+      insert into hotelreview (hotel_id, hotelreview_content,hotelreview_roomname, mem_id)
+               values (#{hotelId}, #{hotelreviewContent},#{hotelreviewRoomname},#{memId})
+   </insert>
+	<insert id="insertHotelQna" parameterType="hotelqnaVO">
+		insert into hotelqna (hotel_id, hotelqna_title, hotelqna_content, hotelqna_date, mem_id)
+					values (#{hotelId}, #{hotelqnaTitle},#{hotelqnaContent},#{hotelqnaDate},#{memId})
+	</insert>
+	<select id="getRoomInfo" resultType="hotelroomVO" parameterType="hotelroomVO">
+		select * from hotel_room where room_id = #{roomId} 
+	</select>
+	<insert id="setDetailRes" parameterType="hoteldetailresVO" useGeneratedKeys="true" keyProperty="resDetailNum">
+		insert into hotel_detail_res (room_id, res_start, res_end, res_status)
+					values (#{roomId}, #{resStart},#{resEnd},#{resStatus})
+	</insert>
+	<insert id="setRes" parameterType="hotelresVO">
+		insert into hotel_res (res_detail_num, mem_name, mem_email, mem_phone, id, res_msg)
+					values (#{resDetailNum}, #{memName},#{memEmail},#{memPhone}, #{id}, #{resMsg})
+	</insert>
+	<select id="getMyHotelres" resultType="hoteljoinVO" parameterType="memberVO">
+		select * from hotel_res hr 
+		INNER JOIN hotel_detail_res hdr ON hr.res_detail_num = hdr.res_detail_num
+		INNER JOIN hotel_room hrm ON hdr.room_id = hrm.room_id
+		INNER JOIN hotel_info hi ON hrm.hotel_id = hi.hotel_id
+		where hr.id = #{id} and hdr.res_status != "예약 취소" and hdr.res_end <![CDATA[>=]]> now()
+	</select>
+	<select id="getMyHotelCancelres" resultType="hoteljoinVO" parameterType="memberVO">
+		select * from hotel_res hr 
+		INNER JOIN hotel_detail_res hdr ON hr.res_detail_num = hdr.res_detail_num
+		INNER JOIN hotel_room hrm ON hdr.room_id = hrm.room_id
+		INNER JOIN hotel_info hi ON hrm.hotel_id = hi.hotel_id
+		where hr.id = #{id} and hdr.res_status = "예약 취소" 
+	</select>
+	<select id="getMyHotelHistoryres" resultType="hoteljoinVO" parameterType="memberVO">
+		select * from hotel_res hr 
+		INNER JOIN hotel_detail_res hdr ON hr.res_detail_num = hdr.res_detail_num
+		INNER JOIN hotel_room hrm ON hdr.room_id = hrm.room_id
+		INNER JOIN hotel_info hi ON hrm.hotel_id = hi.hotel_id
+		where hr.id = #{id} and hdr.res_status != "예약 취소" and hdr.res_end <![CDATA[<]]> now()
+	</select>
+	<update id="resDetailCancel" parameterType="int">
+		update hotel_detail_res set res_status = "예약 취소" where res_detail_num = #{resDetailNum} 
+	</update>
+</mapper>
+
+
+

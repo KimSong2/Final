@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goodee.dao.ShopDAO">
+	<select id="getProductList" resultType="ShopVO">
+		select * from product order by product_date
+	</select>
+	<select id="getCateList" resultType="ShopVO" parameterType="String">
+		select * from product where product_category=#{productCategory} limit 0, 12;
+	</select>
+	
+	<!-- 장인우 카테고리 임시 생성 -->
+	<select id="getCateList2" resultType="ShopVO" parameterType="String">
+		select * from product where product_category=#{productCategory} limit 0, 12;
+	</select>
+	
+	
+	<select id="getListById" resultType="ShopVO" parameterType="String">
+		select * from product where product_id=#{productId};
+	</select>
+	<select id="getOptionById" resultType="productoptionVO" parameterType="String">
+		select * from product_option where product_id=#{productId};
+	</select>
+	
+
+	<select id="getListById2" resultType="ShopVO" parameterType="int">
+		select * from product where product_id=#{productId};
+	</select>
+	<select id="getQna" resultType="productboardVO" parameterType="String">
+		select * from productboard where product_id=#{productId} and proboard_category="qna" and is_delete=0 order by proboard_date desc  limit 0, 5;
+	</select>
+	
+	<select id="getQnaCount" resultType="int" parameterType="String">
+		select count(*) from productboard where product_id=#{productId} and proboard_category="qna" and is_delete=0;
+	</select>
+	<select id="getQnaMore" resultType="productboardVO">
+		select * from productboard where product_id=#{productId} and proboard_category="qna" and is_delete=0 order by proboard_date desc limit #{page}, 5;
+	</select>
+	
+	<select id="getReview" resultType="productboardVO" parameterType="String">
+		select * from productboard where product_id=#{productId} and proboard_category="review" and is_delete=0 order by proboard_date desc limit 0, 5;
+	</select>
+	<select id="getReviewCount" resultType="int" parameterType="String">
+		select count(*) from productboard where product_id=#{productId} and proboard_category="review" and is_delete=0;
+	</select>
+	<select id="getReviewMore" resultType="productboardVO">
+		select * from productboard where product_id=#{productId} and proboard_category="review" and is_delete=0 order by proboard_date desc limit #{page}, 5;
+	</select>
+	<insert id="insertBoard" parameterType="productboardVO">
+		insert into productboard (product_id, proboard_title, proboard_content, mem_id, proboard_category, proboard_date) 
+						values (#{productId},#{proboardTitle},#{proboardContent},#{memId},#{proboardCategory},#{proboardDate})
+	</insert>
+	<insert id="insertWish" parameterType="wishVO">
+		insert into wishlist (id , product_id, count, option) 
+						values (#{id}, #{productId}, #{count},#{option})
+	</insert>
+	<select id="getWishList" resultType="wishVO" parameterType="int">
+		select * from wishlist where id = #{id}
+	</select>
+	<delete id="deletewish" parameterType="int">
+		delete from wishlist where wish_id=#{wishId}
+	</delete>
+	
+	<insert id="insertOrder" parameterType="orderVO" useGeneratedKeys="true" keyProperty="orderId">
+		insert into ordertable (id,receiver_name, receiver_phone, receiver_address1, receiver_address2, receiver_address3, order_msg) 
+					values (#{id},#{receiverName},#{receiverPhone},#{receiverAddress1},#{receiverAddress2},#{receiverAddress3},#{orderMsg})
+	</insert>
+	<update id="updatePoint" parameterType="memberVO">
+		update member set point = #{point} where id=#{id}
+	</update>
+	<insert id="insertOrderdetail" parameterType="orderdetailVO">
+		insert into detailorder (order_id,product_id, product_count, order_status,order_price) 
+						values (#{orderId},#{productId},#{productCount},#{orderStatus},#{orderPrice})
+	</insert>
+	<select id="getMyOrder" resultType="orderjoinVO" parameterType="int">
+		select * from ordertable as ot 
+		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
+		INNER JOIN product ON product.product_id = do.product_id 
+		where id=#{id} and do.order_status Not in ('주문 취소','반품 신청')
+	</select>
+
+	<select id="getPdList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT * FROM PRODUCT
+		WHERE PRODUCT_CATEGORY =#{category} 
+		LIMIT #{stPage},#{pageCount}	
+	</select>
+	<select id="getWlList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from wishlist As wl INNER JOIN product As pd ON wl.product_id = pd.product_id WHERE id = #{id}  
+		LIMIT #{stPage},#{pageCount}	
+		</select>
+	<select id="getOdList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from ordertable as ot 
+		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
+		INNER JOIN product ON product.product_id = do.product_id 
+		where id=#{id} and do.order_status Not in ('주문 취소','반품 신청') LIMIT #{stPage},#{pageCount}
+	</select>
+	<select id="getPdListCnt" resultType="Integer" parameterType="java.util.HashMap">
+		SELECT COUNT(*) FROM PRODUCT
+		WHERE PRODUCT_CATEGORY =#{category} 		
+	</select>
+	<select id="getWlListCnt" resultType="Integer" parameterType="java.util.HashMap">
+		SELECT COUNT(*) from wishlist As wl INNER JOIN product As pd ON wl.product_id = pd.product_id
+		WHERE id =#{id} 		
+	</select>
+	<select id="getOdListCnt" resultType="Integer" parameterType="java.util.HashMap">
+		select count(*) from ordertable as ot 
+		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
+		INNER JOIN product ON product.product_id = do.product_id 
+		where id=#{id} 
+	</select>
+	<delete id="deleteWishAll" parameterType="map" >
+		delete from wishlist where wish_id in
+		<foreach collection="checks" item="item" open="(" close=")" separator=",">
+			 #{item}
+		</foreach>
+	</delete>
+	<select id="ordersInfo" resultType="wishjoinVO" parameterType="map" >
+		select * from wishlist wl 
+		INNER JOIN product pr ON wl.product_id = pr.product_id
+		WHERE wl.wish_id IN
+		<foreach collection="checks" item="item" open="(" close=")" separator=",">
+			 #{item}
+		</foreach>
+	</select>
+	<insert id="insertProductIds" parameterType="String" useGeneratedKeys="true" keyProperty="orderId">
+		insert into ordertable (product_id) values (#{productId})
+	</insert>
+	<update id="deleteOrder" parameterType="int">
+		update detailorder set order_status = "주문 취소" where order_id = #{orderId} 
+	</update>
+	<update id="returnOrder" parameterType="int">
+		update detailorder set order_status = "반품 신청" where order_id = #{orderId} 
+	</update>
+	
+</mapper>
+
+
+

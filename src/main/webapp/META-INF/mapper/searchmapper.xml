@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goodee.dao.NuriDAO">
+	<select id="searchshop" resultType="shopVO" parameterType="String">
+		select * from product where product_name like #{search} or product_shop like #{search} or product_category like #{search} 
+	</select>
+	
+	<select id="searchhotel" resultType="hotelVO" parameterType="String">
+		select * from hotel_info where hotel_name like #{search} or hotel_addr like #{search} or hotel_category like #{search} 
+	</select>
+</mapper>
+
+
+
