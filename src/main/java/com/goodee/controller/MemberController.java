@@ -114,10 +114,17 @@ public class MemberController {
 		
 //		@GetMapping("/findmailcheck/{mail}")
 		@GetMapping("/findmailcheck")
-//		public String findmailcheck(@PathVariable("mail") String mail, Model model) {
 		public String findmailcheck() {
-//			System.out.println(mail);
-//			model.addAttribute("mail", mail);
+//		public String findmailcheck(MemberVO vo) {
+			
 			return "main/findpopup";
+		}
+		
+		@GetMapping("/repw")
+		public String repw(MemberVO vo) {
+			System.out.println(vo.getMemId());
+			System.out.println(vo.getMemEmail());
+			System.out.println(vo.getMemName());
+			return "main/repw";
 		}
 }

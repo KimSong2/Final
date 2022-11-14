@@ -142,10 +142,6 @@
                     gap: 1vh;
                    
                 }
-                
-                .form_repw {
-                display:none;
-                }
   	
   </style>
 </head>
@@ -157,33 +153,27 @@
     </header>
     <main>
     <section id="sec1">
-                        <h2>비밀번호 찾기</h2>
+                        <h2>비밀번호 재설정</h2>
                         <div class="find_container">
                             
                             <div class="form_container">
-                                <form action="${pageContext.request.contextPath}/repw" method="get" class="cform">
-                                    <div class="find_form find_pw">
-                                    	<div class="form_id">
-                                            <label for="">아이디</label><input type="text" name="memId" id="memId">
+                                <form action="#" method="get" class="cform">
+                                    <div class="form_repw">
+                            			<div class="form_pw">
+                                            <label for="">비밀번호</label><input type="text" name="memPw" id="memPw">
                                         </div>
                                         <div class="form_name">
-                                            <label for="">이름</label><input type="text" name="memName" id="memName">
+                                            <label for="">비밀번호 확인</label><input type="text" name="memPw2" id="memPw2">
                                         </div>
-                                        <div class="form_email">
-                                            <label for="">이메일</label><input type="text" name="memEmail" id="memEmail"><button type="button" id="popbtn">인증하기</button>
-                                        </div>
-                                        <input type="hidden" name="check" id="check" />
-                                    	<div class="find_btn">
-                                        	<button type ="submit" id="mailbtn">확인</button>
+                                        <div class="find_btn">
+                                        	<button type ="button" id="pwbtn">확인</button>
                                     	</div>
                                     </div>
-                               
                                 </form>
-                                
-                                     
-                            	
+                               
                             </div>
                         </div>
+                       
                        
                     </section>
     </main>
@@ -192,45 +182,7 @@
     </footer>
   </div>
  
-  <script type="text/javascript">
-  window.addEventListener('DOMContentLoaded', function(){
-	  //팝업창 실행. 메일값도 같이 넘겨줌
-	  $("#popbtn").click(function(){
-	
-		  var id = document.getElementById("memId").value;
-		  var name = document.getElementById("memName").value;
-		  var mail = document.getElementById("memEmail").value;
-		  if(!id) {
-			  alert("아이디를 입력하세요");
-		  } 
-		  if(!name){
-			  alert("이름을 입력하세요");
-		  }
-		  if(!mail){
-			  alert("메일을 입력하세요");
-		  } 
-		if(mail && id && name) {	
-		  	window.open("${pageContext.request.contextPath}/findmailcheck","이메일 인증하기","width = 500, height = 500");	  
-		}
-		
-	  })
-	  
-	  
-	  
-	  $("#mailbtn").click(function(){
-		  var check = document.getElementById("check").value;
-		  
-		  if(check != 1){
-			  alert("인증에 실패했다")
-			  return false;
-			
-		  } 
-	  });
-	  
-	  
-	  
-  })
-  </script>
+ 
 </body>
 
 </html>
