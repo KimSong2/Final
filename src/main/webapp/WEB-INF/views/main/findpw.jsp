@@ -210,7 +210,26 @@
 			  alert("메일을 입력하세요");
 		  } 
 		if(mail && id && name) {	
-		  	window.open("${pageContext.request.contextPath}/findmailcheck","이메일 인증하기","width = 500, height = 500");	  
+			
+			fetch("${pageContext.request.contextPath}/checkId", 
+					{ method: "POST",
+					  headers: {
+					    "Content-Type": "application/json"
+					  },
+					  body: JSON.stringify({id: id, name: name, mail:mail})
+					}).then((response) => response.json())
+					.then((data) => {
+						
+							if(data>0){
+								window.open("${pageContext.request.contextPath}/findmailcheck","이메일 인증하기","width = 500, height = 500");
+							}else{
+								alert("아이디와 이메일을 확인해주세요");
+								return false;
+							}
+						}
+					);
+			
+		  		  
 		}
 		
 	  })
@@ -222,8 +241,10 @@
 		  
 		  if(check != 1){
 			  alert("인증에 실패했다")
+			  document.getElementById("memId").value = "";
+			  document.getElementById("memName").value="";
+			  document.getElementById("memEmail").value="";
 			  return false;
-			
 		  } 
 	  });
 	  

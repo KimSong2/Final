@@ -120,6 +120,20 @@ public class MemberController {
 			return "main/findpopup";
 		}
 		
+		@PostMapping("/checkId")
+		@ResponseBody
+		public int checkId(@RequestBody Map<String, String> map) {
+			System.out.println( map.get("id"));
+			System.out.println( map.get("name"));
+			System.out.println( map.get("mail"));
+			if(mbservice.findpw(map) != null) {
+				return 1;
+			} else {
+				return 0;
+			}
+		       
+		}
+		
 		@GetMapping("/repw")
 		public String repw(MemberVO vo) {
 			System.out.println(vo.getMemId());
@@ -127,4 +141,5 @@ public class MemberController {
 			System.out.println(vo.getMemName());
 			return "main/repw";
 		}
+		
 }

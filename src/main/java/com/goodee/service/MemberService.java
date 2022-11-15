@@ -81,7 +81,7 @@ public class MemberService{
 				//이메일 보낼 양식! 
 		public Map<String,String> joinEmail(Map<String, String> email) {
 			makeRandomNumber();
-			String setFrom = "spdlwhdwls@naver.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
+			String setFrom = "kimsong2_0325@naver.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 			String toMail = email.get("email");
 			String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목 
 			String content = 
@@ -119,5 +119,10 @@ public class MemberService{
 				public void findidphone(MemberVO vo, Model model) {
 					model.addAttribute("vo", dao.findidphone(vo));
 					
+				}
+	 //비밀번호 찾기
+				public MemberVO findpw(Map<String, String> map) {
+					
+					return dao.findpw(map);
 				}
 }
