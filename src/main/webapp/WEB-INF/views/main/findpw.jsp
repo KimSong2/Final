@@ -146,6 +146,10 @@
                 .form_repw {
                 display:none;
                 }
+                
+                #repwbtn{
+                display:none;
+                } 
   	
   </style>
 </head>
@@ -161,7 +165,7 @@
                         <div class="find_container">
                             
                             <div class="form_container">
-                                <form action="${pageContext.request.contextPath}/repw" method="get" class="cform">
+                                <form action="${pageContext.request.contextPath}/repw" method="get" class="cform" id="usercheck">
                                     <div class="find_form find_pw">
                                     	<div class="form_id">
                                             <label for="">아이디</label><input type="text" name="memId" id="memId">
@@ -173,9 +177,27 @@
                                             <label for="">이메일</label><input type="text" name="memEmail" id="memEmail"><button type="button" id="popbtn">인증하기</button>
                                         </div>
                                         <input type="hidden" name="check" id="check" />
-                                    	<div class="find_btn">
-                                        	<button type ="submit" id="mailbtn">확인</button>
-                                    	</div>
+                                    	
+                                    </div>
+                                    <div class="form_repw">
+                                    	<div class="form-group">
+											<div class="eheck_font" id="pw_div">
+												<label for="pw" style="width : 110px;">비밀번호</label> <input type="password" id="mem_pw3" name="mem_pw3" placeholder=" PASSWORD">
+												<div class="eheck_font" id="pw_check"></div>
+											</div>
+										</div>
+										<div class="form-group">
+											<dIv CLASS="EHECK_FONT" ID="pw2_div">
+												<label for="pw2" style="width : 110px;">비밀번호 확인</label> <input type="password" id="mem_pw2" name="mem_pw2" placeholder=" Confirm Password">
+												<div class="eheck_font" id="pw2_check"></div>
+												<input type="hidden" id="mem_pw" name="memPw">
+											</div>
+										</div>
+                            		
+                                    </div>
+                                    <div class="find_btn">
+                                        	<button type ="button" id="mailbtn">확인</button>
+                                        	<button type="submit" id ="repwbtn">비밀번호 재설정</button>
                                     </div>
                                
                                 </form>
@@ -194,12 +216,14 @@
  
   <script type="text/javascript">
   window.addEventListener('DOMContentLoaded', function(){
+	
 	  //팝업창 실행. 메일값도 같이 넘겨줌
 	  $("#popbtn").click(function(){
-	
 		  var id = document.getElementById("memId").value;
 		  var name = document.getElementById("memName").value;
 		  var mail = document.getElementById("memEmail").value;
+		  
+		  
 		  if(!id) {
 			  alert("아이디를 입력하세요");
 		  } 
@@ -238,16 +262,82 @@
 	  
 	  $("#mailbtn").click(function(){
 		  var check = document.getElementById("check").value;
+		 
 		  
 		  if(check != 1){
 			  alert("인증에 실패했다")
-			  document.getElementById("memId").value = "";
-			  document.getElementById("memName").value="";
-			  document.getElementById("memEmail").value="";
+			  $("#memId").val("");
+			  $("#memName").val("");
+			  $("#memEmail").val("");
+
 			  return false;
-		  } 
+		  } else { 
+			  $(".form_repw").show();
+			  $("#mailbtn").hide();
+			  $("#repwbtn").show(); 
+			  $("#memId").prop('readonly',true);
+			  $("#memName").prop('readonly',true);
+			  $("#memEmail").prop('readonly',true);
+			  
+			  
+		  }
 	  });
 	  
+	  var pwJ = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+	  $('#mem_pw3').change(function() {
+	        if (pwJ.test($('#mem_pw3').val())) {
+	           $('#pw_check').text('');
+	        } else {
+	           $('#pw_check').text('8~25자의 숫자와 문자, 특수문자 조합으로 설정해주세요.');
+	           $('#pw_check').css('color', 'red');
+	        }
+	  });
+	  $('#mem_pw2').change(function() {
+	      if ($('#mem_pw3').val() != $(this).val()) {
+	         $('#pw2_check').text('비밀번호가 일치하지 않습니다.');
+	         $('#pw2_check').css('color', 'red');
+	      } else {
+	         $('#pw2_check').text('');
+	      }
+	   });
+	  
+	// 비밀번호가 같은 경우 && 비밀번호 정규식
+	 $('#usercheck').on('submit',function(){
+      if (($('#mem_pw3').val() == ($('#mem_pw2').val()))
+                       && (pwJ.test($('#mem_pw3').val()))) {
+                	 
+           $('#mem_pw').val(sha256($('#mem_pw3').val()));
+           
+      } else {
+           
+           alert('비밀번호를 확인하세요.');
+           return false;
+      };
+	 });
+	  
+	 /*  $("#repwbtn").click(function(){
+		  
+		  
+	  }) */
+	  
+	  
+	  /* fetch("${pageContext.request.contextPath}/checkId", 
+		{ method: "POST",
+headers: {
+  "Content-Type": "application/json"
+},
+body: JSON.stringify({id: id, name: name, mail:mail})
+}).then((response) => response.json())
+.then((data) => {
+	
+		if(data>0){
+			window.open("${pageContext.request.contextPath}/findmailcheck","이메일 인증하기","width = 500, height = 500");
+		}else{
+			alert("아이디와 이메일을 확인해주세요");
+			return false;
+		}
+	}
+); */
 	  
 	  
   })

@@ -136,10 +136,19 @@ public class MemberController {
 		
 		@GetMapping("/repw")
 		public String repw(MemberVO vo) {
-			System.out.println(vo.getMemId());
-			System.out.println(vo.getMemEmail());
-			System.out.println(vo.getMemName());
-			return "main/repw";
+			System.out.println("컨트롤러");
+			System.out.println("여기용"+vo.getMemId());
+			System.out.println("여기용"+vo.getMemEmail());
+			System.out.println("여기용"+vo.getMemName());
+			System.out.println("여기용"+vo.getMemPw());
+			
+			if(mbservice.updatepw(vo)) {
+				
+				return "main/main";
+			} else {
+				return "redirect:findpw";
+			}
+			
 		}
 		
 }

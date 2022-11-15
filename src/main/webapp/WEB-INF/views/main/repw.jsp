@@ -159,10 +159,11 @@
                             <div class="form_container">
                                 <form action="#" method="get" class="cform">
                                     <div class="form_repw">
+                                    	
                             			<div class="form_pw">
                                             <label for="">비밀번호</label><input type="text" name="memPw" id="memPw">
                                         </div>
-                                        <div class="form_name">
+                                        <div class="form_pw2">
                                             <label for="">비밀번호 확인</label><input type="text" name="memPw2" id="memPw2">
                                         </div>
                                         <div class="find_btn">

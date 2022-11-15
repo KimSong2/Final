@@ -30,5 +30,7 @@ public interface MemberDAO {
 	public MemberVO findidphone(MemberVO vo);
 	
 	public MemberVO findpw(Map<String, String> map);
+	
+	public int updatepw(MemberVO vo);
 
 }

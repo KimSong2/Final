@@ -125,4 +125,10 @@ public class MemberService{
 					
 					return dao.findpw(map);
 				}
+				
+				public boolean updatepw(MemberVO vo) {
+					int i = dao.updatepw(vo);
+					
+					return (i>0)?true:false;
+				}
 }
