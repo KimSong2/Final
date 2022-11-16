@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Zilla+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/header.css?11">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
+	<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <style>
        
 
@@ -277,7 +279,7 @@
                        <br>
                        <h3>이메일 문의</h3><br>
                        <p style="margin-bottom: 5px;">문의 내용</p>
-                       <form action="${pageContext.request.contextPath}/mailing">
+                       <form action="${pageContext.request.contextPath}/mailing" id="mailform">
                        <select name="qacategory" id="qacategory">
                         <option value="제품 문의">제품 문의</option>
                         <option value="제품 환불 문의">제품 환불 문의</option>
@@ -315,6 +317,14 @@
                     </article>
                 </section>
                 </div>
+                <script type="text/javascript">
+                	$("#mailform").on('submit',function(){
+                		if($("#accept").is(":checked") == false){
+                			alert("동이ㅡ해라");
+                			return false;
+                		}
+                	})
+                </script>
         </main>
 
 

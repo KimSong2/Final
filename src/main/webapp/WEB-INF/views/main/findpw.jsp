@@ -297,6 +297,7 @@
 			  $("#memId").prop('readonly',true);
 			  $("#memName").prop('readonly',true);
 			  $("#memEmail").prop('readonly',true);
+			  $("#popbtn").attr("disabled", true);
 			  
 			  
 		  }
