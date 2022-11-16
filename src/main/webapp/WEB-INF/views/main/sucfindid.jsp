@@ -46,7 +46,7 @@
 
     body {
       position: relative;
-      height: 3000px
+ 
     }
 
 	button{
@@ -83,7 +83,7 @@
                 }
 
                 .suc_container {
-                    width: 50%;
+                    
                     margin: 0 auto;
                     display: flex;
                     flex-direction: column;
@@ -102,7 +102,8 @@
                 .info_p {
                     display: flex;
     flex-direction: column;
-    width: 78%;
+    width: 100%;
+    gap:1vh;
                 }
 
                 .info_name,.info_mail{
@@ -113,7 +114,20 @@
                 .info_id{
                     display: flex;
     flex-direction: row;
+    justify-content:flex-end;
     
+                }
+                
+                .suc_a{
+                    display: flex;
+    justify-content: center;
+                }
+                
+                .suc_a>a{
+                    background: black;
+    color: white;
+    padding: 2px 20px;
+
                 }
   	
   </style>
@@ -126,21 +140,21 @@
     </header>
     <main>
     <section id="sec1">
-                        <h2>아이디 찾기</h2>
+                        
                          <h2>고객님 아이디 찾기가 완료 되었습니다.</h2>
                         <c:choose>
                         <c:when test="${not empty vo}">
                       
+                      
+                      
                         <div class="suc_container">
                             <div class="suc_p">
                                 <p>저희 쇼핑몰를 이용해주셔서 감사합니다.</p>
-                                <p>다음정보로 가입된 아이디가 총 1개 있습니다.</p>
+          						<p>다음정보로 가입된 아이디가 총 ${count}개 있습니다.</p>
                             </div>
-                            
-                            <div class="suc_info">
-                                <div class="info_img">
-                                    이미지
-                                </div>
+                            <c:forEach var="vo" items="${vo}" varStatus="status">
+                             
+                            	<div class="suc_info">
                                 <div class="info_p">
                                     <div class="info_name">
                                         <p class="p1">이름</p>
@@ -156,14 +170,16 @@
                                     <c:set var="id" value="${vo.memId }"/>
                                         <input type="radio" name="" id="" checked><p><c:out value="${fn:substring(id, 0, fn:length(id) - 3)}" /> ***</p>
                                     </div>
-                                    <p>고객님 즐</p>
-                                    <a href="">비밀번호 재설정</a>
                                     
                                 </div>
                                 
                             </div>
-                          
+                           </c:forEach>
+                           <div class="suc_a">
+                           <a href="${pageContext.request.contextPath }/findpw">비밀번호 재설정</a>
+                                    </div>
                         </div>
+                       
                        </c:when>
                        <c:when test="${empty vo}">
                       

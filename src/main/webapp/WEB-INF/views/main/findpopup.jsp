@@ -10,8 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<input type="text" name="memMail" id="memMail" value="" />
-	<div class="input-group-addon">
+<div class="pop_container">
+<h2>이메일 인증하기</h2>
+<div class="input-group-addon">
+	<input type="text" name="memMail" id="memMail" value="" readonly/>
+	
    		<button type="button" class="btn btn-primary" id="mail-Check-Btn">인증번호 받기</button>
 	</div>
    	<div class="mail-check-box">
@@ -20,6 +23,7 @@
 		<button type="button" class="mail-check-btn1">인증 확인</button>
 	</div>
 	<span id="mail-check-warn"></span>
+	</div>
 	<script type="text/javascript">
 	const valemail = opener.$("#memEmail").val();
 	$('input[name=memMail]').attr("value",valemail);

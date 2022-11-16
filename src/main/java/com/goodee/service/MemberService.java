@@ -117,6 +117,7 @@ public class MemberService{
 					model.addAttribute("vo",dao.findidmail(vo));
 				}
 				public void findidphone(MemberVO vo, Model model) {
+					model.addAttribute("count", dao.findidphone(vo).size());
 					model.addAttribute("vo", dao.findidphone(vo));
 					
 				}

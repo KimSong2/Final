@@ -110,7 +110,7 @@
               <p style="font-size: 11px; border-bottom:1px solid black; width:130px; margin-top:10px;" >혹시 회원이 아니신가요??</p>
               <a href="${pageContext.request.contextPath}/membership" style="font-size:13px">회원 가입</a>
               <div class="find">
-            	<a href="${pageContext.request.contextPath}/findid" style="font-size:12px">아이디 찾기</a> <span>/</span><a href="${pageContext.request.contextPath}/findpw" style="font-size:12px">비밀번호 찾기</a>
+            	<a href="${pageContext.request.contextPath}/findid" style="font-size:12px">아이디 찾기</a> <span style="font-size:12px">&nbsp;/&nbsp;</span><a href="${pageContext.request.contextPath}/findpw" style="font-size:12px">비밀번호 재설정</a>
             	</div>
             </div>
             </li>

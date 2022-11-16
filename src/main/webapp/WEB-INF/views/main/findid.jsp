@@ -44,7 +44,7 @@
 
     body {
       position: relative;
-      height: 3000px
+
     }
 
 	button{
@@ -132,14 +132,14 @@
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    gap: 1vh;
+                    gap: 2vh;
                 }    
                 .find_phone {
                    
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    gap: 1vh;
+                    gap: 2vh;
                    
                 }
   	
@@ -160,6 +160,7 @@
                                 <input type="radio" name="r_find" id="r_phone"><label for="r_phone">휴대폰번호</label>
                             </div>
                             <div class="form_container">
+                            
                                 <form action="${pageContext.request.contextPath}/findidmail" method="get" class="cform">
                                     <div class="find_form find_email">
                                         <div class="form_name">
@@ -188,6 +189,7 @@
                                     </div>
                                     
                                 </form>
+                                
                             </div>
                         </div>
                         <script>

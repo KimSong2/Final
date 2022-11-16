@@ -1,5 +1,6 @@
 package com.goodee.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -27,7 +28,7 @@ public interface MemberDAO {
 	/* public MemberVO getmemberinfo(@Param("memId") String id); */
 
 	public MemberVO findidmail(MemberVO vo);
-	public MemberVO findidphone(MemberVO vo);
+	public List<MemberVO> findidphone(MemberVO vo);
 	
 	public MemberVO findpw(Map<String, String> map);
 	

@@ -44,7 +44,7 @@
 
     body {
       position: relative;
-      height: 3000px
+     
     }
 
 	button{
@@ -90,24 +90,32 @@
                 }
 
                 .form_name,
-                .form_email,
-                .form_phone {
+                .form_id,
+                .find_pw {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+                    margin-bottom:2vh;
+                    
+                }
+                .form_email2 {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                 
                     
                 }
 
-                .find_form {
+                .find_form, .form_repw {
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    gap: 1vh;
+                    
                 }
                 .form_container>form {
                     display: flex;
     flex-direction: column;
-    gap: 1vh;
+ 
     justify-content: center;
     align-items: center;
                 }
@@ -127,21 +135,7 @@
                 html {
                     scroll-behavior: smooth;
                 }
-                .find_email{
-                    display: block;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1vh;
-                }    
-                .find_phone {
-                   
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1vh;
-                   
-                }
+               
                 
                 .form_repw {
                 display:none;
@@ -150,6 +144,16 @@
                 #repwbtn{
                 display:none;
                 } 
+                #popbtn {
+                    float: right;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid black;
+}
+                }
+                .find_pw {
+                margin-bottom : 2vh;
+                }
   	
   </style>
 </head>
@@ -174,25 +178,35 @@
                                             <label for="">이름</label><input type="text" name="memName" id="memName">
                                         </div>
                                         <div class="form_email">
-                                            <label for="">이메일</label><input type="text" name="memEmail" id="memEmail"><button type="button" id="popbtn">인증하기</button>
+                                        	<div class="form_email2">
+                                            <label for="">이메일</label><input type="text" name="memEmail" id="memEmail">
+                                            </div>
+                                            <div class="btnbox">
+                                        		<button type="button" id="popbtn">인증하기</button>
+                                            </div>
                                         </div>
+                                        
                                         <input type="hidden" name="check" id="check" />
                                     	
                                     </div>
                                     <div class="form_repw">
-                                    	<div class="form-group">
+                                    	
 											<div class="eheck_font" id="pw_div">
-												<label for="pw" style="width : 110px;">비밀번호</label> <input type="password" id="mem_pw3" name="mem_pw3" placeholder=" PASSWORD">
-												<div class="eheck_font" id="pw_check"></div>
+											<div class="find_pw" id="pw1">
+												<label for="pw" >비밀번호</label> <input type="password" id="mem_pw3" name="mem_pw3" placeholder=" PASSWORD">
+												</div>
+												<div class="eheck_font" id="pw_check" style="font-size:13px;"></div>
 											</div>
-										</div>
-										<div class="form-group">
+										
+										
 											<dIv CLASS="EHECK_FONT" ID="pw2_div">
-												<label for="pw2" style="width : 110px;">비밀번호 확인</label> <input type="password" id="mem_pw2" name="mem_pw2" placeholder=" Confirm Password">
-												<div class="eheck_font" id="pw2_check"></div>
+											<div class="find_pw" id="pw2">
+												<label for="pw2" >비밀번호 확인</label> <input type="password" id="mem_pw2" name="mem_pw2" placeholder=" Confirm Password">
+												</div>
+												<div class="eheck_font" id="pw2_check" style="font-size:13px;"></div>
 												<input type="hidden" id="mem_pw" name="memPw">
 											</div>
-										</div>
+									
                             		
                                     </div>
                                     <div class="find_btn">
@@ -223,6 +237,11 @@
 		  var name = document.getElementById("memName").value;
 		  var mail = document.getElementById("memEmail").value;
 		  
+		  var popupX = (document.body.offsetWidth / 2) - (500 / 2);
+		// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+		var popupY= (document.body.offsetHeight / 2) - (240 / 2);
+		// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 		  
 		  if(!id) {
 			  alert("아이디를 입력하세요");
@@ -245,7 +264,7 @@
 					.then((data) => {
 						
 							if(data>0){
-								window.open("${pageContext.request.contextPath}/findmailcheck","이메일 인증하기","width = 500, height = 500");
+								window.open("${pageContext.request.contextPath}/findmailcheck","이메일 인증하기","width = 500, height = 240");
 							}else{
 								alert("아이디와 이메일을 확인해주세요");
 								return false;
@@ -290,12 +309,18 @@
 	        } else {
 	           $('#pw_check').text('8~25자의 숫자와 문자, 특수문자 조합으로 설정해주세요.');
 	           $('#pw_check').css('color', 'red');
+	           $('#pw_check').css('margin-bottom', '2vh');
+	           $('#pw1').css('margin-bottom', '0');
 	        }
 	  });
 	  $('#mem_pw2').change(function() {
 	      if ($('#mem_pw3').val() != $(this).val()) {
 	         $('#pw2_check').text('비밀번호가 일치하지 않습니다.');
 	         $('#pw2_check').css('color', 'red');
+	         $('#pw2_check').css('margin-bottom', '2vh');
+	         $('#pw2').css('margin-bottom', '0');
+	         
+	         
 	      } else {
 	         $('#pw2_check').text('');
 	      }
