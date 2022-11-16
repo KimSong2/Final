@@ -203,6 +203,18 @@ width:100%;
 text-align:center;
 	margin: 20px 0;
 }
+        .fadeIn {
+         animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      @keyframes fadeIn { 
+         0%{
+            opacity: 0;
+         }
+         100%{
+            opaciry:1;
+         }
+      }
     </style>
 </head>
 
@@ -234,39 +246,90 @@ text-align:center;
                         <h2 style="text-decoration: underline" class="h2">주문내역조회</h2>
                             <div id="sec2-div1">
                                 <ul>
-                                    <li class="selected">주문내역조회( ${fn:length(list)})</li>
-                                    <li>취소/반품/교환 내역(0)</li>
+                                    <li id="li-1st" class="selected">주문내역조회( ${fn:length(list)})</li>
+                                    <li id="li-2nd">취소/반품/교환 내역(0)</li>
                                 </ul>
                             </div>
-                            <div id="sec2-div2">
-                                <form action="">
-                                    <div id="sec2-div2-sel">
-                                        <ul>
-                                        	<li>- 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
-                                        	<li>- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
-                                    	</ul>
-                                    </div>
-                                </form>
+                            <div id="list">
+                            	<div id="sec2-div2">
+                                	<form action="">
+                                    	<div id="sec2-div2-sel">
+                                        	<ul>
+                                        		<li>- 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
+                                        		<li>- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+                                    		</ul>
+                                    	</div>
+                                	</form>
 
-                            </div>
-                            <div id="sec2-div3">
-                                주문 상품 정보
-                                <table id="sec2-div3-table1">
-                                    <tr>
-                                        <td><h3>주문일자</h3><h3>[주문번호]</h3></td>
-                                        <td><h3>이미지</h3></td>
-                                        <td><h3>상품정보</h3></td>
-                                        <td><h3>수량</h3></td>
-                                        <td><h3>상품구매금액</h3></td>
-                                        <td><h3>주문처리상태</h3></td>
-                                    </tr>
+                            	</div>
+                            	<div id="sec2-div3">
+                                	주문 상품 정보
+                                	<table id="sec2-div3-table1">
+                                    	<tr>
+                                        	<td><h3>주문일자</h3><h3>[주문번호]</h3></td>
+                                        	<td><h3>이미지</h3></td>
+                                        	<td><h3>상품정보</h3></td>
+                                        	<td><h3>수량</h3></td>
+                                        	<td><h3>상품구매금액</h3></td>
+                                        	<td><h3>주문처리상태</h3></td>
+                                    	</tr>
                                     
-                                    <tbody id="tbody"></tbody>
+                                   		<tbody id="tbody"></tbody>
                                    
                                     
-                                </table>
-                               <div id="pageBtn"></div>
+                                	</table>
+                               	<div id="pageBtn"></div>
+                            	</div>
                             </div>
+                            <div id="cancel" style="display:none">
+                            	<div id="sec2-div2">
+                                	<form action="">
+                                    	<div id="sec2-div2-sel">
+                                        	<ul>
+                                        		<li>- 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
+                                        		<li>- 주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
+                                    		</ul>
+                                    	</div>
+                                	</form>
+
+                            	</div>
+                            	<div id="sec2-div3">
+                                	주문 상품 정보
+                                	<table id="sec2-div3-table1">
+                                    	<tr>
+                                        	<td><h3>주문일자</h3><h3>[주문번호]</h3></td>
+                                        	<td><h3>이미지</h3></td>
+                                        	<td><h3>상품정보</h3></td>
+                                        	<td><h3>수량</h3></td>
+                                        	<td><h3>상품구매금액</h3></td>
+                                        	<td><h3>주문처리상태</h3></td>
+                                    	</tr>
+                                    
+                                   		<tbody id="tbody"></tbody>
+                                   
+                                    
+                                	</table>
+                               	<div id="pageBtn"></div>
+                            	</div>
+                            </div>
+                            <script type="text/javascript">
+                            document.getElementById("li-1st").addEventListener("click",function(){
+                            	document.getElementById("list").style.display="block";
+                            	document.getElementById("list").classList.add("fadeIn");
+                            	document.getElementById("cancel").style.display="none";
+                            	document.getElementById("cancel").classList.remove("fadeIn");
+                            	document.getElementById("li-1st").classList.add("selected");
+                            	document.getElementById("li-2nd").classList.remove("selected");
+                            });
+							document.getElementById("li-2nd").addEventListener("click",function(){
+								document.getElementById("list").style.display="none";
+								document.getElementById("list").classList.remove("fadeIn");
+                            	document.getElementById("cancel").style.display="block";
+                            	document.getElementById("cancel").classList.add("fadeIn");
+                            	document.getElementById("li-1st").classList.remove("selected");
+                            	document.getElementById("li-2nd").classList.add("selected");
+                            })
+                            </script>
                         </div>
                     </article>
                 </section>

@@ -79,7 +79,7 @@
     }
 
     #sec2 {
-      z-index: 2; 
+      z-index: 1.1; 
       transform: translateX(101%);
       position: absolute;
       background-color: #f5ebe0;
@@ -110,7 +110,7 @@
     }
 
     #sec3 {
-      z-index: 3;
+      z-index: 1.2;
       transform: translateX(101%);
       position: absolute;
       
@@ -136,7 +136,7 @@
     }
     #sec4 {
       width:100vw;
-      z-index: 4;
+      z-index: 1.3;
       transform: translateX(101%);
       position: absolute;
       

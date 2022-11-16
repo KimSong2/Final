@@ -11,18 +11,20 @@
 <title>Insert title here</title>
 <style>
 #container {
-	margin: 0 auto;
+		margin: 0 auto;
 	padding: 0 auto;
 	box-sizing: border-box;
 	width: 100vw;
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 300px 1fr;
-	grid-template-rows: 120px 100px 1fr 120px;
-	grid-template-areas: 'header header' 'nav nav' 'main main'
+	grid-template-rows: 70px 1fr 70px;
+	grid-template-areas: 'header header' 'main main'
 		'footer footer';
 }
-
+footer p{
+display:inline;
+}
 header {
 	grid-area: header;
 	display: flex;
@@ -30,14 +32,7 @@ header {
 	align-items: center;
 }
 
-nav {
-	grid-area: nav;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	background-color: gray;
-}
+
 
 main{
 	display: grid;
@@ -103,13 +98,10 @@ label {
 </head>
 <body>
 	<div id="container">
-		<header>
-		<h1>임시 헤더</h1>
-<%--            <%@ include file="../frame/mypage/header.jsp" %> --%>
+	<header>
+        <%@ include file="../frame/viser/top.jsp"%>
         </header>
-		<nav>
-			<h2>관리자 페이지</h2>
-		</nav>
+		
 		<main>
 			<div id="sec1">
 				<div id="menu-bar">
@@ -134,9 +126,8 @@ label {
 			</div>
 		</main>
 		<footer>
-		<h1>임시 푸터</h1>
-<%-- 			<%@ include file="../frame/main/footer.jsp"%> --%>
-		</footer>
+      <%@ include file="../frame/viser/footer.jsp" %>
+    </footer>
 		</div>
 </body>
 </html>

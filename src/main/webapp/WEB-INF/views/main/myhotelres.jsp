@@ -199,7 +199,7 @@
            color:red;
         }
         .fadeIn {
-         animation: fadeIn 1.5s ease-out forwards;
+         animation: fadeIn 0.5s forwards;
       }
 
       @keyframes fadeIn { 
@@ -332,7 +332,11 @@
                                            <td><p>결제금액</p></td>
                                            <td><p>주문처리상태</p></td>
                                        </tr>
-                                    
+                                    	<c:if test="${fn:length(list) == 0}">
+                                    		<tr>
+                                    			<td colspan="8">비어 있음</td>
+                                    		</tr>
+                                    	</c:if>
                                        <c:forEach var="item" items="${list}">
                                        <tr>
                                           <fmt:parseDate value="${item.resStart }" var="strPlanDate" pattern="yyyy-MM-dd"/>
@@ -376,7 +380,11 @@
                                         <td><p>결제금액</p></td>
                                         <td><p>주문처리상태</p></td>
                                     </tr>
-                                    
+                                    <c:if test="${fn:length(history) == 0}">
+                                    	<tr>
+                                    		<td colspan="8">비어 있음</td>
+                                    	</tr>
+                                    </c:if>
                                     <c:forEach var="item" items="${history}">
                                     <tr>
                                         <fmt:parseDate value="${item.resStart }" var="strPlanDate" pattern="yyyy-MM-dd"/>
@@ -450,7 +458,11 @@
                                         <td><p>결제금액</p></td>
                                         <td><p>주문처리상태</p></td>
                                     </tr>
-                                    
+                                    <c:if test="${fn:length(cancel) == 0}">
+                                    	<tr>
+                                    		<td colspan="8">비어 있음</td>
+                                    	</tr>
+                                    </c:if>
                                     <c:forEach var="item" items="${cancel}">
                                     <tr>
                                        <fmt:parseDate value="${item.resStart }" var="strPlanDate" pattern="yyyy-MM-dd"/>

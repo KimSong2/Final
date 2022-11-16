@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,10 +41,18 @@
             margin: 0;
             padding: 0;
         }
-
-        body {
-            height: 100vh;
-        }
+body{
+margin:0px;
+padding:0px;
+overflow-x:hidden;
+}
+ header {
+	height:70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color:#f1f1f1;
+}
 		img{
 			width:100px;
 			height:100px;
@@ -55,7 +64,7 @@
             display: grid;
             grid-template-rows: 1fr 1fr 1fr;
             grid-template-columns: 1fr;
-            grid-template-areas: 'header' 'main' 'footer';
+         
         }
 
        
@@ -248,22 +257,17 @@ margin-top:200px;
 #changeImg{
 display:none;
 }
-.modify{
-width:100%;
-height:70px;
-text-align:center;
-border-top:1px solid black;
-border-bottom:1px solid black;
-margin-bottom:30px;
-background-color:black;
-color:white;
-}
-.modify h1{
-margin-top:10px;
-margin-right:1.4rem;
-}
+
 .info{
 color:darkgray;
+margin-left:30px;
+}
+footer{
+height:100px;
+}
+footer img{
+width:32px;
+height:32px;
 }
     </style>
 </head>
@@ -272,16 +276,14 @@ color:darkgray;
 
     <div id="container">
         <header>
-           <%@ include file="../frame/mypage/header.jsp" %>
+        <%@ include file="../frame/viser/top.jsp"%>
         </header>
 
         <main>
             <div id="main-container">
                     
                         <div id="artcontainer">
-							<div class="modify">
-							<h1>수정페이지</h1>
-							</div>
+							
 							<div class="info">
 							<h1>수정정보</h1>
 							</div>
@@ -341,9 +343,12 @@ color:darkgray;
                             
              
         
-
+ <footer>
+      <%@ include file="../frame/viser/footer.jsp" %>
+    </footer>
         
     </div>
+   
     <script>
    
     

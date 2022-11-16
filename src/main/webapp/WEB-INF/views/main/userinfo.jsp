@@ -202,7 +202,7 @@
     
 
     
-			input {
+			.inputlist, .email ,.phone  {
  			width : 40%;
  			height : 30px;
  			border-radius : 5px;
@@ -284,7 +284,7 @@
             #mem_address2, #mem_detailaddress{
             margin-left: 4px;
             }
-            select{
+            #phone1{
             width: 65px;
             padding-top : 5px;
             padding-bottom : 5px;
@@ -344,32 +344,32 @@
                         <div class="info-container">
 
  						<label for="memId"><h3 class="h3">아이디</h3></label>
- 						<input type="text" name="memId" id="memId" value="${list.memId}" readonly>
+ 						<input type="text" class="inputlist" name="memId" id="memId" value="${list.memId}" readonly>
                        
                     </div>
 
                     <div class="info-container">
                         <label for="password"><h3 class="h3">비밀번호 변경</h3></label>
-                        <input type="password" name="password" id="password" placeholder="변경할 비밀번호"  pattern=".{4,16}" required>
+                        <input type="password"  class="inputlist" name="password" id="password" placeholder="변경할 비밀번호"  pattern=".{4,16}" required>
                         <span>(영문 대소문자/숫자, 4~16자)</span><br>
                         </div>
                         
                         <div class="info-container">
                         <label for="memPw"><h3 class="h3">비밀번호 확인</h3></label>
-                        <input type="password" name="memPw" id="memPw" placeholder="비밀번호 확인"  pattern=".{4,16}" required><br>
+                        <input type="password"  class="inputlist" name="memPw" id="memPw" placeholder="비밀번호 확인"  pattern=".{4,16}" required><br>
                         
                         </div>          
                               
                         <div class="info-container">
                         <label for="memName"><h3 class="h3">이름</h3></label>
-                        <input type="text" name="memName" id="memName" value="${list.memName}"><br>
+                        <input type="text"  class="inputlist" name="memName" id="memName" value="${list.memName}"><br>
                         </div>                   
           
                         <div class="info-container">
-                                <label for="memAddress1"><h3 class="h3">주소</h3></label> <input type="text" placeholder="우편번호" id="mem_address1" name="memOaddress" value="${list.memOaddress}">
+                                <label for="memAddress1"><h3 class="h3">주소</h3></label> <input type="text"  class="inputlist" placeholder="우편번호" id="mem_address1" name="memOaddress" value="${list.memOaddress}">
                                 <button onclick="execPostCode();">주소 검색</button><br>
-                                <label for="memAddress2"></label><input type="text" name="memAddress" id="mem_address2" placeholder="기본주소" value="${list.memAddress}"><span>기본주소</span><br>
-                                <label for="memDetailaddress"></label><input type="text" name="memDetailaddress" id="mem_detailaddress" placeholder="상세주소" value="${list.memDetailaddress}"><span>상세주소</span>
+                                <label for="memAddress2"></label><input type="text" class="inputlist"  name="memAddress" id="mem_address2" placeholder="기본주소" value="${list.memAddress}"><span>기본주소</span><br>
+                                <label for="memDetailaddress"></label><input type="text" class="inputlist"  name="memDetailaddress" id="mem_detailaddress" placeholder="상세주소" value="${list.memDetailaddress}"><span>상세주소</span>
                          </div>                         
                         
 
@@ -384,11 +384,11 @@
 							<form:input path="phone2" class="phone" id="phone2" value="${separateVO.phone2}"/> - 
 							<form:input path="phone3" class="phone" id="phone3" value="${separateVO.phone3}"/>
                        </div>
-                  			<input type="text"  id="iphone" value="" name="memPhone"/>
-                  			<input type="text" value="" id="iemail" name="memEmail"/>
+                  			<input type="text"  class="inputlist"  id="iphone" value="" name="memPhone"/>
+                  			<input type="text" value=""  class="inputlist"  id="iemail" name="memEmail"/>
                        <div class="info-container">
                         <label for="mem_email" class="lb">이메일 *</label> 
-                        <input type="text" value="${separateVO.email1}" id="memEmail" name="mem_email" class="email">@
+                        <input type="text" value="${separateVO.email1}" class="inputlist"  id="memEmail" name="mem_email" class="email">@
                         <input type="text" value="${separateVO.email2}" class="email" name="mem_email">
                         </div>
                          <button class="btn1" id="sub1">회원정보수정</button>

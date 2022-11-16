@@ -171,11 +171,12 @@ public class ServletAppContext implements WebMvcConfigurer{
 			// addPathPatterns에 들어가는 경로는 사용자가 요청하는 요청 경로이다.
 			reg1.addPathPatterns("/gomain2");
 			reg2.addPathPatterns("/shop/pay/{id}");
+			reg2.addPathPatterns("/goreserve/{hotelId}/{startdate}/{enddate}");
 			reg3.addPathPatterns("/wish");
 			reg3.addPathPatterns("/mypage");
 			reg3.addPathPatterns("/userinfo");
 			reg3.addPathPatterns("/myhotelres");
-			reg2.addPathPatterns("/goreserve/{hotelId}/{startdate}/{enddate}");
+			
 			
 			
 			// 인터셉터에 동일 경로를 바라보게 하고 다수의 인터셉터를 걸 경우 맨 위에 등록된 intercepter의 prehandle부터

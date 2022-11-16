@@ -109,6 +109,8 @@
       height: 70px;
       font-size:25px;
       outline:none;
+      margin:0;
+      box-sizing: inherit;
     }
     #nav2-li-1stdiv button{
       height:84px;

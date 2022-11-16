@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,12 +14,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Zilla+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/header.css?11">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+   <script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/hotel/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
+        <title>Document</title>
     <style>
-       
-
+        
         html,
         body,
         header,
@@ -41,14 +52,24 @@
             margin: 0;
             padding: 0;
         }
-
         body {
-            height: 100vh;
+            position: relative;
+            height: 100%;
+            overflow-x:hidden;
         }
-      .sec2-div3-table1 img{
-         width:100px;
-         height:100px;
-      }
+		input{
+    		height: 25px;
+    		margin: 10px 0;
+    		outline: none;
+    		font-size: 15px;
+		}
+		input[type="radio"]{
+			padding:10px 0 0 0;
+			margin:0;
+		}
+       	select{
+       		height:30px;
+       	}
         #container {
             position: relative;
             width: 100%;
@@ -56,480 +77,310 @@
             display: grid;
             grid-template-rows: 70px 1fr 70px;
             grid-template-columns: 1fr;
-            grid-template-areas: 'header' 'main' 'footer';
         }
-
-       
-
-        main {
-            width: 100%;
-            background-color: #f5ebe0;
-            grid-area: main;
-        }
-
-        section {
-            width: 70vw;
-
-        }
-
-        button {
-            cursor: pointer;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-
-        
-
-        .line {
-
-            height: 1vh;
-            width: 80%;
-
-        }
-
-        #main-container {
-            height:100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        #main-container img{
-           width:120px;
-           height:120px;
-        }
-        #artcontainer{
-            display: flex;
-            flex-direction: column;
-             
-            width:60vw;
-        }
-       
-        #sec2 {
-            width:85%;
-            margin: 40px;
+        header {
+            z-index: 100;
+            background-color: #EDEDE9;
             display: flex;
             flex-direction: row;
-            
-        }
-
-        #sec2 nav {
-            flex: 1;
-            padding: 0 20px 0 0;
-            border-right: 1px solid black;
-            height:1000px;
-        }
-
-          #sec2 nav ul{
-            position: relative;
-            top: 25%;
-            
-        }
-        #sec2 nav li {
-            margin: 0 0 20px 0;
-            font-size: 20px;
-            ;
-            list-style-type: none;
-            display: block;
-        }
-        #sec2-div1{
-            
-        }
-        #sec2-div1 ul {
-            width: 100%;
-            background-color: #f5ebe0;
-            font-size: 20px;
-        }
-        #sec2-div1 li {
-            padding:10px;
-            cursor:pointer;
-        }
-        .selected{
-            background-color: black;
-            color:white;
-        }
-        #art2 {
-            flex:5;
-            width:70vw;
-            display: flex;
-            justify-content: center;
-           
-        }
-       
-        #sec2-div2 li {
-            display: block;
-            font-size: 13px;
-        }
-        .sec2-div2-sel{
-           margin:10px 0;
-            padding:10px;
+            align-items: center;
+            justify-content: space-between;
+            width: 100vw;
             height: 100%;
-            border:5px solid white;
+        }
+        main {
+            width: 100%;
+            background-color: #EDEDE9;
+            min-height: 86vh;
+        }
+        section {
+            width: 100%;
+            height: 100%;
+        }
+         .date {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 5vh;
+            padding: 1vh 0;
         }
         
-        .sec2-div3-table1{
-            border-collapse: collapse;
-            width:100%;
-        }
-        .sec2-div3-table1 td{
-           padding:5px;
-            text-align: center;
-            border:1px solid black;
-        }
-        #sec2-div3-table2{
-            border-collapse: collapse;
-            
-        }
-        #sec2-div3-table2 td{
-            text-align: center;
-            
-        }
-        .hotel-info{
-           text-align: left !important;
-        }
-        .resMsg{
-           text-align: left;
-        }
-        .res-cancel{
-           font-size:12px;
-           color:red;
-        }
-        .res-cancel:visited{
-           color:red;
-        }
-        .fadeIn {
-         animation: fadeIn 1.5s ease-out forwards;
-      }
-
-      @keyframes fadeIn { 
-         0%{
-            opacity: 0;
-         }
-         100%{
-            opaciry:1;
-         }
-      }
-   .h2{
-   width:100%;
-   text-align:left;
-   margin-bottom:50px;
-   margin-top:30px;
-   font-size:30px;
-}
-      .write-review{
-         cursor:pointer;
-         color:blue;
-      }
-      .modal{
-         display: flex;
-            justify-content: center;
+        .indate {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: fit-content;
             align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
+            gap: 15px;
+        }
+        .outbox {
+            display: block !important;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .clicked {
+        	display : block !important;
+        	display : flex !important;
+        }
+        
+        .price {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid black;
+            height: fit-content;
+            padding: 4vh 3vw;
+            position: sticky;
+            left: 70%;
+            top: 5%;
+        }
+		button{
+			cursor:pointer;
+		}
+        .p_box,
+        .total {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        #reservebtn {
+            background-color: rgb(24, 24, 24);
+            color: whitesmoke;
             width: 100%;
-            height: 100%;
-      }
-      .modalcont {
-            text-align: center;
-          position: relative;
-          background-color: #f5ebe0;
-          border-radius: 10px;
-          top: 0;
-          padding: 10px 25px;
-          width: 25%;
-          height: 50%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          margin: 8% auto;
-          z-index: 200;
+            height: 5vh;
         }
-        textarea{
-           outline:none;
+        
+        .reservecont {
+           width: 60%;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 3fr 1.8fr;
+}
+        
+         .reserveinfo {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap:30px;
+            position: relative;
         }
-        .hidden {
-            display: none;
+        .dogtype label{
+        	margin-left: 20px;
+    		width: 100px;
+    		display: inline-block;
         }
-      .modalback {
-            background-color: rgba(0, 0, 0, 0.4);
-            width: 100%;
-            height: 100%;
-            position: absolute;
+        #room-info{
+        	margin: 10px 0;
+        	width:306px;
         }
-        .modal-title{
-           font-size:20px;
-           font-weight:900;
-           margin-bottom: 10px;
+        .meminfo {
+        	display: flex;
+            flex-direction: column;
+            
+            
         }
-        .close {
-          background-color: #f5ebe0;
-          cursor: pointer;
-          font-weight: bold;
-          float:right;
-          font-size: 20px;
+        #meminfo-div2,#notice-content{
+        	margin-left:20px;
         }
-        .review-btn{
-           width: 150px;
-          height: 30px;
-          font-size: 16px;
+        .meminfo label{
+        	width: 100px;
+    		display: inline-block;
+        }
+        #memName1{
+        	width:303px;
+        }
+        #memEmail, #memEmail2{
+        	width:140px;
+        }
+        #memPhone1,#memPhone2,#memPhone3{
+        	width:90px;
+        } 
+        #resMsg{
+        	margin-top:10px;
+        	padding:3px;
+        	outline: none;
+        	width: 603px;
+    		height: 193px;
         }
     </style>
 </head>
 
 <body>
-
     <div id="container">
         <header>
-           <%@ include file="../frame/mypage/header.jsp" %>
+            <%@ include file="../frame/hotel/header.jsp" %>
         </header>
 
         <main>
-            <div id="main-container">
-                
-                <section id="sec2">
-                    <nav>
-                        <ul>
-                             <li><a href="${pageContext.request.contextPath}/mypage">주문내역조회</a></li>
-                             <li><a href="${pageContext.request.contextPath}/myhotelres" style="text-decoration: underline">예약내역조회</a></li>
-                            <li><a href="${pageContext.request.contextPath}/userinfo">회원정보</a></li>
-                            <li><a href="${pageContext.request.contextPath}/wish">장바구니</a></li>
-                            <li><a href="${pageContext.request.contextPath}/usequestion/자주묻는질문">자주묻는질문</a></li>
-                            <li><a href="${pageContext.request.contextPath}/question">문의하기</a></li>
-                           
-              
-                        </ul>
-                    </nav>
-                    
-                    <article id="art2">
-                    
-                        <div id="artcontainer">
-                        <h2 style="text-decoration: underline" class="h2">예약내역조회</h2>
-                            <div id="sec2-div1">
-                                <ul>
-                                    <li class="selected">예약내역 조회( ${fn:length(list)} )</li>
-                                    <li>이용내역 조회( ${fn:length(history)} )</li>
-                                    <li>예약취소내역 조회( ${fn:length(cancel)} )</li>
-                                </ul>
+            <section>
+                <%-- <div class="date">
+					<div>
+						<p> 선택날짜 : ${startdate} ~ ${enddate}</p> 
+					</div>
+				</div> --%>
+
+                <div class="reservecont">
+                	<div class="reserveinfo">
+                		<div>
+                			<p>Hotel</p>
+                			<h1>${hotel[0].hotelName}</h1>
+                		</div>
+                		<div class="dogtype">
+                			<div>
+                				<h2>객실 선택</h2><hr/>
+                			</div>
+                			<label for="room-info">객실 종류 * </label>
+                			<select id="room-info">
+                				<c:forEach var="item" items="${hotel}">
+                					<option value = "${item.roomId}">객실명 : ${item.roomName} / 객실 타입: ${item.roomType}</option>
+                				</c:forEach>
+                			</select>
+                		</div>
+                		<div class="meminfo">
+                			<div>
+                				<h2>예약자 정보</h2><hr/>
+                			</div>
+                			<form:form action="" modelAttribute="separateVO" id="section-container">
+                			<div id="meminfo-div2">
+								<label for="memName1" class="lb">예약자 *</label><input type="text" value="${user.memName}" id="memName1" class="memName" name="memName1"><br> 
+								<label for="memEmail" class="lb">이메일 *</label><input type="text" value="${separateVO.email1}" id="memEmail" name="memEmail">@<input type="text" id="memEmail2" value="${separateVO.email2}"><br>
+
+								<label for="memPhone" class="lb">휴대 전화
+								</label><form:select path="phone1" id="memPhone1" name="memPhone">
+											<form:option value="010">010</form:option>
+											<form:option value="011">011</form:option>
+											<form:option value="017">017</form:option>
+											<form:option value="019">019</form:option>
+									</form:select> - <form:input path="phone2" id="memPhone2" /> - <form:input path="phone3" id="memPhone3"/><br>
+								<label for="resMsg" class="lb">기타 사항</label><br><textarea id="resMsg" cols="55" rows="5" placeholder="* 추가로 전달하시고 싶은 내용을 적어주세요"></textarea>	
+
+							</div>
+
+							</form:form>
+                		</div>
+                		<div class="notice">
+                    		<div>
+                				<h2>주의 사항</h2><hr/>
+                			</div>
+                			<div id="notice-content">
+                            	<p>☑ 1년 이내 5가지 접종(종합, 코로나, 켄넬코프, 인플루엔자, 광견병) 받지 않은 반려견은 입실이 제한됩니다.<br>
+								   ※ 접종기록은 접종병원명이 꼭 필요하므로 증빙 자료는 미리 준비해주세요.</p>
+								<p>☑ 1살 미만의 반려견인 경우 항체 검사가 필수 입니다. (단, 1살 이상 시 재접종 기록 확인)</p>
+								<p>☑ 생리,건강문제 또는 공격성이 강해 타 고객의 이용에 피해가 되는 반려견 일 경우 입실이 제한됩니다.</p>
                             </div>
-                           
-                            <div id="sec2-div3">
-                                <div>
-                                    <div class="sec2-div2-sel">
-                                        * 예약 취소는 예약날짜 3일전까지만 가능합니다.<br>
-                                        * 추가 문의 사항은 해당 호텔 전화로 문의 해주시길 바랍니다.
-                                    </div>
-                                   <table class="sec2-div3-table1">
-                                       <tr>
-                                          <td><p>결제날짜</p></td>
-                                           <td><p>예약일자</p></td>
-                                           <td><p>이미지</p></td>
-                                           <td><p>호텔정보</p></td>
-                                           <td><p>예약자 연락처</p></td>
-                                           <td><p>예약자 이메일</p></td>
-                                           <td><p>결제금액</p></td>
-                                           <td><p>주문처리상태</p></td>
-                                       </tr>
-                                    
-                                       <c:forEach var="item" items="${list}">
-                                       <tr>
-                                          <fmt:parseDate value="${item.resStart }" var="strPlanDate" pattern="yyyy-MM-dd"/>
-                                 <fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-                                 <fmt:parseDate value="${item.resEnd }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-                                 <fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-                                 <fmt:parseDate value="${item.resDate}" var="resDate" pattern="yyyy-MM-dd HH:mm:ss.S"/>
-                              
-                                           <td rowspan="2"><fmt:formatDate value="${resDate}" pattern="yyyy-MM-dd"/></td>
-                                           <td rowspan="2">${item.resStart}~ <br>${item.resEnd}</td>
-                                           <td rowspan="2"><img src="${pageContext.request.contextPath}/${item.hotelThum}"></td>
-                                           <td class="hotel-info">호텔명: ${item.hotelName} <br>
-                                              객실정보: ${item.roomName}[${item.roomType}]
-                                           </td>
-                                           <td>${item.memPhone}</td>
-                                           <td>${item.memEmail}</td>
-                                           <td><fmt:formatNumber value="${Math.floor((item.roomPrice* (endDate - strDate))*1.1)}"   pattern="#,###" />원</td>
-                                           <td>${item.resStatus}<br>
-                                              <a href="#" class="res-cancel" onclick="fnalert(${item.resDetailNum},'${item.resStart}')">[예약취소]</a>
-                                           </td>
-                                       </tr>
-                                       <tr>
-                                          <td colspan="5"><p class="resMsg">전달 사항 : ${item.resMsg}</p></td>
-                                       </tr>
-                                       </c:forEach>
-                                   </table>
-                                </div>
-                                <div style="display:none">
-                                   <div class="sec2-div2-sel">
-                                        * 호텔 이용 내역입니다.<br>
-                                        * 따뜻한 리뷰 한줄이라도 감사하게 생각하겠습니다.
-                                    </div>
-                                    <table class="sec2-div3-table1" >
-                                    <tr>
-                                       <td><p>결제날짜</p></td>
-                                        <td><p>예약일자</p></td>
-                                        <td><p>이미지</p></td>
-                                        <td><p>호텔정보</p></td>
-                                        <td><p>예약자 연락처</p></td>
-                                        <td><p>예약자 이메일</p></td>
-                                        <td><p>결제금액</p></td>
-                                        <td><p>주문처리상태</p></td>
-                                    </tr>
-                                    
-                                    <c:forEach var="item" items="${history}">
-                                    <tr>
-                                       <fmt:parseDate value="${item.resStart }" var="strPlanDate" pattern="yyyy-MM-dd"/>
-                              <fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-                              <fmt:parseDate value="${item.resEnd }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-                              <fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-                              <fmt:parseDate value="${item.resDate}" var="resDate" pattern="yyyy-MM-dd HH:mm:ss.S"/>
-                              
-                                        <td rowspan="2"><fmt:formatDate value="${resDate}" pattern="yyyy-MM-dd"/></td>
-                                        <td rowspan="2">${item.resStart}~ <br>${item.resEnd}</td>
-                                        <td rowspan="2"><img src="${pageContext.request.contextPath}/${item.hotelThum}"></td>
-                                        <td class="hotel-info">호텔명: ${item.hotelName} <br>
-                                           객실정보: ${item.roomName}[${item.roomType}]
-                                        </td>
-                                        <td>${item.memPhone}</td>
-                                        <td>${item.memEmail}</td>
-                                        <td><fmt:formatNumber value="${Math.floor((item.roomPrice* (endDate - strDate))*1.1)}"   pattern="#,###" />원</td>
-                                        <td>${item.resStatus}<br>
-                                           <span class="write-review">[리뷰작성]</span>
-                                           <div class="modal hidden">
-                                              <div class="modalback"></div>
-                                    <div class="modalcont">
-                                       <form action="${pageContext.request.contextPath}/insertHotelReview" method="post">
-                                          <input type="hidden" name="hotelId"value="${item.hotelId}">
-                                          <input type="hidden" name="hotelreviewRoomname"value="${item.roomName}">
-                                          <p class="modal-title">리뷰 작성 <span class="close">X</span> </p>
-                                          <p>뎅누리에서 이용하신 호텔의 소중한 후기를 남겨주세요!</p>
-                                          <p>후기의 성격과 맞지않는 욕설,도배글은 삭제될 수 있습니다. </p><br>
-                                          <textarea name="hotelreviewContent" cols="50" rows="20"></textarea><br>
-                                          <button class="review-btn">작성 완료</button>
-                                       </form>
-                                    </div>
-                                           </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                       <td colspan="5"><p class="resMsg">전달 사항 : ${item.resMsg}</p></td>
-                                    </tr>
-                                    </c:forEach>
-                                    <script>
-                                       let wr = document.getElementsByClassName("write-review");
-                                       let modal = document.getElementsByClassName("modal");
-                                       let close = document.getElementsByClassName("close");
-                                       let back = document.getElementsByClassName("modalback");
-                                       for(let i = 0 ; i<wr.length; i++){
-                                          wr[i].addEventListener("click",function(){
-                                             modal[i].style.display="block";
-                                          })
-                                          close[i].addEventListener("click",function(){
-                                             modal[i].style.display="none";
-                                          })
-                                          back[i].addEventListener("click",function(){
-                                             modal[i].style.display="none";
-                                          })
-                                       }
-                                    </script>
-                                   </table>
-                                </div>
-                                <div style="display:none">
-                                   <div class="sec2-div2-sel">
-                                        * 취소된 예약 내역입니다.
-                                    </div>
-                                   <table class="sec2-div3-table1" >
-                                    <tr>
-                                       <td><p>결제날짜</p></td>
-                                        <td><p>예약일자</p></td>
-                                        <td><p>이미지</p></td>
-                                        <td><p>호텔정보</p></td>
-                                        <td><p>예약자 연락처</p></td>
-                                        <td><p>예약자 이메일</p></td>
-                                        <td><p>결제금액</p></td>
-                                        <td><p>주문처리상태</p></td>
-                                    </tr>
-                                    
-                                    <c:forEach var="item" items="${cancel}">
-                                    <tr>
-                                       <fmt:parseDate value="${item.resStart }" var="strPlanDate" pattern="yyyy-MM-dd"/>
-                              <fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-                              <fmt:parseDate value="${item.resEnd }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-                              <fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-                              <fmt:parseDate value="${item.resDate}" var="resDate" pattern="yyyy-MM-dd HH:mm:ss.S"/>
-                              
-                                        <td rowspan="2"><fmt:formatDate value="${resDate}" pattern="yyyy-MM-dd"/></td>
-                                        <td rowspan="2">${item.resStart}~ <br>${item.resEnd}</td>
-                                        <td rowspan="2"><img src="${pageContext.request.contextPath}/${item.hotelThum}"></td>
-                                        <td class="hotel-info">호텔명: ${item.hotelName} <br>
-                                           객실정보: ${item.roomName}[${item.roomType}]
-                                        </td>
-                                        <td>${item.memPhone}</td>
-                                        <td>${item.memEmail}</td>
-                                        <td><fmt:formatNumber value="${Math.floor((item.roomPrice* (endDate - strDate))*1.1)}"   pattern="#,###" />원</td>
-                                        <td>${item.resStatus}<br>
-                                           
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                       <td colspan="5"><p class="resMsg">전달 사항 : ${item.resMsg}</p></td>
-                                    </tr>
-                                    </c:forEach>
-                                   </table>
-                                </div>
-                                <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                                <script type="text/javascript">
-                                   var now = new Date();
-                                
-                                var year = now.getFullYear();   
-                                var month = now.getMonth()+1;       
-                                var day = now.getDate(); 
-                              
-                                 
-                                   function fnalert(resnum,resstart){
-                                      
-                                     
-                                      var words = (resstart||'').split('-');
-                                     var stDate = new Date(words[0], words[1], words[2]);
-                                     var endDate = new Date(year, month, day);                           
-                                  
-                                     var btMs = stDate.getTime() - endDate.getTime() ;
-                                     var btDay = btMs / (1000*60*60*24); 
-                                      console.log(btDay);
-                                     if(btDay>3){
-                                         if(confirm('정말로 삭제하시겠습니까?')){
-                                            location.href="${pageContext.request.contextPath}/resCancel/"+resnum;
-                                         }
-                                      }else{
-                                         return alert('예약하신 날짜 3일 전에는 취소가 불가능 합니다');
-                                      }
-                                   }
-                                   
-                                 $("#sec2-div1 li").click(function(){
-                                    var idx=$(this).index();
-                                    $("#sec2-div1 li").removeClass("selected");
-                                    $("#sec2-div1 li").eq(idx).addClass("selected");
-                                    
-                                    $("#sec2-div3> div").removeClass("fadeIn")
-                                    $("#sec2-div3> div").eq(idx).addClass("fadeIn");
-                                    $("#sec2-div3> div").hide();
-                                    $("#sec2-div3> div").eq(idx).show();
-                                 })
-                                   
-                                </script>
-                            </div>
+                    	</div>
+                	</div>
+					<div class="price">
+                        <div class="p_box">
+                        	<fmt:parseDate value="${startdate }" var="strPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+							<fmt:parseDate value="${enddate }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+							<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+							<p>[ ${startdate} ~ ${enddate} ]</p><br>
+                            <p>Room : <span id="room-name">${hotel[0].roomName}</span> <span id="room-type">[${hotel[0].roomType}견]</span></p>
+                            <h3>가격 : <span id="room-price"><fmt:formatNumber value="${hotel[0].roomPrice}" pattern="#,###" /></span>KRW</h3>
+                            <p><span id="room-date">${endDate - strDate }</span> 박</p>
+                            <p>+세금(10%)</p>
+                            <p><span  id="room-tax"><fmt:formatNumber value="${((endDate - strDate)*hotel[0].roomPrice)*0.1}" pattern="#,###" /></span>KRW</p>
                         </div>
-                    </article>
-                </section>
+                        <div class="total">
+                            <h1>총 예약금액 <br><span id="total-price"><fmt:formatNumber value="${((endDate - strDate)*hotel[0].roomPrice)*1.1}" pattern="#,###" /></span>KRW</h1><br>
+                            <button onclick="requestPay()" id="reservebtn">회원예약</button>
+                        </div>
+                    </div>
+                    
                 </div>
+              	<script type="text/javascript">
+              		document.getElementById("room-info").addEventListener("change",function(){
+              			let roomId = Number(document.getElementById("room-info").value);
+              			console.log(roomId);
+              			let roomName= document.getElementById("room-name");
+              			let roomType= document.getElementById("room-type");
+              			let roomPrice= document.getElementById("room-price");
+              			let roomDate= document.getElementById("room-date");
+              			let roomTax = document.getElementById("room-tax");
+              			let totalPrice= document.getElementById("total-price");
+              			
+              			fetch("${pageContext.request.contextPath}/getroominfo",{ 
+              				method: "POST",
+							headers: {
+								    "Content-Type": "application/json"
+							},
+							body: JSON.stringify({roomId})
+						}).then((response) => response.json())
+							.then((data) => {
+								roomName.innerText = data.roomName;
+								roomType.innerText = "["+data.roomType+"견]";
+								roomPrice.innerText = data.roomPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+								let date = Number(roomDate.innerText);
+								roomTax.innerText = Math.floor((date * data.roomPrice)*0.1).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+								totalPrice.innerText = Math.floor((date * data.roomPrice)*1.1).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+								
+						});
+              		})
+              		
+              		/* document.getElementById("reservebtn").addEventListener("click",function(){
+              			let roomId = $("#room-info").val();
+              			let memPhone = $("#memPhone1").val()+$("#memPhone2").val()+$("#memPhone3").val();
+              			let memEmail = $("#memEmail").val()+'@'+$("#memEmail2").val();
+              			let memName = $("#memName1").val();
+              			let resMsg = $("#resMsg").val();
+              			console.log(resMsg);
+              			location.href="${pageContext.request.contextPath}/myhotelres/${startdate}/${enddate}"
+              							+"?roomId="+roomId
+              							+"&memPhone="+memPhone
+              							+"&memEmail="+memEmail
+              							+"&memName="+memName
+              							+"&resMsg="+resMsg;
+              		}); */
+              	</script>
+              	 <script>
+              	 let email = $('#memEmail').val()+"@"+$('#memEmail2').val();
+              	 let name = $('#memName1').val();
+              	 
+var IMP = window.IMP; // 생략가능
+IMP.init('imp70736007'); // <-- 본인 가맹점 식별코드 삽입
+function requestPay() {
+  IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+  IMP.request_pay({
+    pg: "inicis",
+    pay_method: "card",
+    merchant_uid : 'merchant_'+new Date().getTime(),
+    name : '${hotel[0].hotelName}',
+    amount : '100',
+    buyer_email : email,
+    buyer_name : name
+    
+  }, function (rsp) { // callback
+      if (rsp.success) {
+    	   let roomId = $("#room-info").val();
+			let memPhone = $("#memPhone1").val()+$("#memPhone2").val()+$("#memPhone3").val();
+			let memEmail = $("#memEmail").val()+'@'+$("#memEmail2").val();
+			let memName = $("#memName1").val();
+			let resMsg = $("#resMsg").val();
+			console.log(resMsg);
+			location.href="${pageContext.request.contextPath}/myhotelres/${startdate}/${enddate}"
+							+"?roomId="+roomId
+							+"&memPhone="+memPhone
+							+"&memEmail="+memEmail
+							+"&memName="+memName
+							+"&resMsg="+resMsg; 
+      } else {
+    	  alert("결제에 실패하였습니다.");
+      }
+  });
+}
+</script> 
+            </section>
         </main>
-
-
         <footer>
             <%@ include file="../frame/main/footer.jsp" %>
         </footer>
     </div>
+
 </body>
 
 </html>

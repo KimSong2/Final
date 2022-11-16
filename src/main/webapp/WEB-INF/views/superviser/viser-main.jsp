@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
+
 
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
 <style>
 body{
 margin:0px;
@@ -15,16 +15,19 @@ padding:0px;
 overflow-x:hidden;
 }
 #container {
-	margin: 0 auto;
+		margin: 0 auto;
 	padding: 0 auto;
 	box-sizing: border-box;
 	width: 100vw;
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 300px 1fr;
-	grid-template-rows: 120px 100px 1fr 120px;
-	grid-template-areas: 'header header' 'nav nav' 'main main'
+	grid-template-rows: 70px 1fr 70px;
+	grid-template-areas: 'header header' 'main main'
 		'footer footer';
+}
+footer p{
+display:inline;
 }
 
 header {
@@ -35,22 +38,7 @@ header {
 	background-color:#f1f1f1;
 }
 
-nav {
-	grid-area: nav;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	background-color: black;
-	color:white;
-}
-nav h1{
-cursor:pointer;
-}
-nav h1:hover{
-opacity:0.9;
-color:white;
-}
+
 main{
 	display: grid;
 	grid-area : main;
@@ -74,7 +62,6 @@ main{
 
 footer {
 	grid-area: footer;
-	
 }
 footer li{
 line-height:100%;
@@ -147,6 +134,9 @@ border:1px solid black;
 margin-left:20px;
 margin-top:20px;
 }
+p{
+
+}
 </style>
 
 </head>
@@ -155,9 +145,6 @@ margin-top:20px;
 		<header>
         <%@ include file="../frame/viser/top.jsp"%>
         </header>
-		<nav>
-				<%@ include file="../frame/viser/header.jsp"%>
-		</nav>
 		<main>
 			<div id="sec1">
 				<div id="menu-bar">
@@ -192,11 +179,11 @@ margin-top:20px;
 			</div>
 			</div>
 		</main>
-		<footer>
-		
-			<%@ include file="../frame/main/footer.jsp"%>
-		</footer>
+		 
 		</div>
+		<footer>
+      <%@ include file="../frame/viser/footer.jsp" %>
+    </footer>
 		<script>
 		
 		document.getElementById("memName").addEventListener("click",function(e){

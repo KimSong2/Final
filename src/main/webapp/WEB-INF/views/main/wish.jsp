@@ -463,9 +463,9 @@ text-align:center;
 					console.log(data);
 	
 				var productListDiv= $("#tbody");
-					
+					let a = 0;
 					for(dict of data.list){
-						
+						a += dict.product_price * dict.count;
 					
 					productListDiv.append(
 							"<tr>"
@@ -559,6 +559,7 @@ text-align:center;
 							'<button onclick="getCateList('+total+')" class="pagebtn">'+'\>\>'+'</button>'
 					);
 					
+					document.getElementById("allprice").innerText= a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ;
  				});
 			}
 		</script>

@@ -242,8 +242,8 @@ section> div{
 					
 					<br> 
 					<label for="memAddress" class="lb">주소 * </label><input type="text" placeholder="우편번호" value="${user.memOaddress}" id="memAddress" name="memAddress"><button class="scbtn" type="button" onclick="execPostCode();">주소 검색</button><br>
-					<input type="text" name="maid-addr1" class="maid-addr" placeholder="기본주소" value="${user.memAddress}"><br>
-					<input type="text" name="maid-addr2" class="maid-addr" placeholder="상세주소" value="${user.memDetailaddress}">
+					<input type="text" id="memAddress2" name="maid-addr1" class="maid-addr" placeholder="기본주소" value="${user.memAddress}"><br>
+					<input type="text" id="memAddress3" name="maid-addr2" class="maid-addr" placeholder="상세주소" value="${user.memDetailaddress}">
 					</div>
 				</div>
 			</section>
@@ -355,11 +355,10 @@ section> div{
 				            }   */
 				            
 				            
-				            $("[name=mem_oaddress]").val(data.zonecode);
-				            $("[name=mem_address]").val(fullRoadAddr);
+				           
 				            
-				            document.getElementById('mem_oaddress').value = data.zonecode; //5자리 새우편번호 사용
-				            document.getElementById('mem_address').value = fullRoadAddr;
+				           document.getElementById('memAddress').value = data.zonecode; 
+				           document.getElementById('memAddress2').value = fullRoadAddr;
 				            
 				            //document.getElementById('mem_detailaddress').value = data.jibunAddress; 
 				        }

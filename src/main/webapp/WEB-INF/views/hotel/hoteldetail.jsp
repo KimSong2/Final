@@ -557,7 +557,7 @@
                             		<p>전화번호: ${hotel[0].hotelTel}</p><br>
                             	</div>
                             	<div>
-                            		<button id="goreserve">RESERVATION</button>
+                            		<button type="button" id="goreserve">RESERVATION</button>
                             	</div>
                             	<script type="text/javascript">
                             		document.getElementById("goreserve").addEventListener("click",function(){

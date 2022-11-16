@@ -317,7 +317,8 @@
                     </article>
                 </section>
                 </div>
-                <script type="text/javascript">
+                
+                 <script type="text/javascript">
                 	$("#mailform").on('submit',function(){
                 		if($("#accept").is(":checked") == false){
                 			alert("동이ㅡ해라");

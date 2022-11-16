@@ -15,18 +15,20 @@ padding:0px;
 overflow-x:hidden;
 }
 #container {
-	margin: 0 auto;
+		margin: 0 auto;
 	padding: 0 auto;
 	box-sizing: border-box;
 	width: 100vw;
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 300px 1fr;
-	grid-template-rows: 120px 100px 1fr 120px;
-	grid-template-areas: 'header header' 'nav nav' 'main main'
+	grid-template-rows: 70px 1fr 70px;
+	grid-template-areas: 'header header' 'main main'
 		'footer footer';
 }
-
+footer p{
+display:inline;
+}
 header {
 	grid-area: header;
 	display: flex;
@@ -35,22 +37,7 @@ header {
 	background-color:#f1f1f1;
 }
 
-nav {
-	grid-area: nav;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	background-color: black;
-	color:white;
-}
-nav h1{
-cursor:pointer;
-}
-nav h1:hover{
-opacity:0.9;
-color:white;
-}
+
 
 main{
 	display: grid;
@@ -259,9 +246,7 @@ a:hover {
 		<header>
         <%@ include file="../frame/viser/top.jsp"%>
         </header>
-		<nav>
-				<%@ include file="../frame/viser/header.jsp"%>
-		</nav>
+		
 		<main>
 			<div id="sec1">
 				<div id="menu-bar">

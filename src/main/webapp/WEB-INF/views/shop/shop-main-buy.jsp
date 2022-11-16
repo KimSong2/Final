@@ -23,9 +23,10 @@
 
 <title>Document</title>
 <style>
-* {
-	margin: 0 auto;
-	/* box-sizing: border-box; */
+html, body, header, main, footer, section, h1, h2, h3, h4, h5, h6, p, a, ul, li, nav {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -39,19 +40,6 @@ body {
 	overflow-x:hidden;
 }
 
-/*승철짱 CSS*/
-nav {
-	font-family: 'Noto Sans KR', sans-serif;
-	margin: 0;
-	padding: 0;
-}
-#nav1 ul{
-	padding:0;
-}
-body {
-	height: 100%;
-	
-}
 
 #container {
 	min-height:100vh;
@@ -60,11 +48,19 @@ body {
 }
 
 main {
-	width: 95%;
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
 }
 
 #main-container {
 	background-color: #D9D9D9;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #main-box {
@@ -212,10 +208,10 @@ option {
 
 /* sub-box, 상태창, 상세상품 설명 */
 #sub-box {
-	width: 90%;
-	display: grid;
-	grid-template-columns: 300px 3fr;
-	padding: 10px 10px;
+	width: 80%;
+    display: grid;
+    grid-template-columns: 400px 3fr;
+    padding: 10px 10px;
 }
 
 #status-bar {
@@ -263,15 +259,6 @@ keyframes fadeIn {
 #prdInfo>p {
 	font-size: 0.8rem;
 	margin-top: 0.6rem;
-}
-
-h5 {
-	font-size: 0.9rem;
-	line-height: 1.3rem;
-}
-
-font {
-	size: 2;
 }
 
 .board {
@@ -346,7 +333,7 @@ font {
 }
 #review-btn-div, #review-btn-div2{
 	display:flex;
-	justfy-content:center;
+	justify-content:center;
 	
 }
 #review-btn-div button, #review-btn-div2 button{
@@ -359,6 +346,9 @@ font {
 button{
 	cursor:pointer;
 }
+html {
+      scroll-behavior: smooth;
+    }
 </style>
 
 

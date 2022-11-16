@@ -314,6 +314,7 @@
 	           $('#pw1').css('margin-bottom', '0');
 	        }
 	  });
+	  
 	  $('#mem_pw2').change(function() {
 	      if ($('#mem_pw3').val() != $(this).val()) {
 	         $('#pw2_check').text('비밀번호가 일치하지 않습니다.');

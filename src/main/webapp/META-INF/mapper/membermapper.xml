@@ -49,22 +49,10 @@
 	
 	<select id="findpw" parameterType="map" resultType="memberVO">
 		SELECT * FROM member 
-		<!-- <where>
-			<if test="mem_id != null">
-				and mem_id = #{id}	
-			</if>
-			<if test="mem_name != null">
-				and mem_name = #{name}
-			</if>
-			<if test="mem_email != null">
-				and mem_email = #{mail}
-			</if>
-		   AND mem_name = '송이' AND mem_email = 'ssongyi0325@naver.com'
-		 </where> -->
 		 where mem_id = #{id} and mem_name = #{name} and mem_email = #{mail};
 	</select>
-	
-	<update id="updatepw" parameterType="memberVO">
+
+<update id="updatepw" parameterType="memberVO">
 	update member set mem_pw = #{memPw} where mem_id = #{memId} and mem_name = #{memName} and mem_email=#{memEmail};
 	</update>
 </mapper>
