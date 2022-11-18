@@ -273,9 +273,14 @@ img {
 					
 					window.addEventListener('DOMContentLoaded', function(){
 						
+					//카테고리 배열 설저
+						
+						
 						let now = new Date();
-						let tom = new Date();	
+						let tom = new Date();
+						
 						tom.setDate(tom.getDate()+1);
+						
 						
 						$('input[name="dates"]').daterangepicker({
 							 "startDate": now,
@@ -317,8 +322,7 @@ img {
 							
 						});
 						
-						var startdate = null;
-						var enddate=null;
+						
 						
 						console.log("스타트"+startdate);
 						console.log("엔드"+enddate);
@@ -329,7 +333,14 @@ img {
 	                    let cateArr = [];
 						let cateArr2 = [];
 		        
-						//지역구 선택 안했으면 글씨 빨간색으로 변경
+						var startdate = null;
+						var enddate=null;
+	                    
+	                   
+	                    
+	                   
+						
+						//지역구 선택 안했으면 글씨 빨간색으로 바뀌는거
 						$("#asearchbtn").click(function(){
 							
 							 $('input[name="cate"]:checked').each(function(){
@@ -349,6 +360,7 @@ img {
 								$("#isbx").css("display", "flex");
 							});
 						} else { //지역구를 선택한 경우
+							
 							
 								$("#selectp").css("color","black");
 								$("#isbx").css("display", "none");

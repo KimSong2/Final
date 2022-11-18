@@ -180,6 +180,21 @@ public class ShopController {
 		
 		return map;
 	}
+	@PostMapping("getCancelList")
+	@ResponseBody
+	public Map<String,Object> getCancelList(@RequestBody String inParam) {
+		JSONParser parser = new JSONParser();
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			JSONObject jsonObject = (JSONObject) parser.parse(inParam);
+			map=spservice.getCancelList(jsonObject);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return map;
+	}
 	
 	@GetMapping("orders")
 	public String orders(@RequestParam String[] checks,Model model,HttpSession session) {

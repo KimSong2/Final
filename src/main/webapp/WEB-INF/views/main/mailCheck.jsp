@@ -167,7 +167,7 @@ button {
 					</div>
    					<div class="mail-check-box">
    						<p><small id="small">- 인증번호 받기 버튼을 클릭하시면 번호입력창이 활성화 됩니다!</small></p>
-						<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" id = "inputCheck">
+						<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
 						<button type="button" class="mail-check-btn1">인증 확인</button>
 					</div>
    					<span id="mail-check-warn"></span>
@@ -181,42 +181,12 @@ button {
 <script type="text/javascript">
 document.getElementById("gomembership").addEventListener("click",function(){
 	console.log(document.getElementById("mail-check-warn").innerHTML);
-	let email = $('#userEmail1').val() + $('#userEmail2').val();
-	fetch("${pageContext.request.contextPath}/checkEmail",
-			{ method: "POST",
-			  headers: {
-			    "Content-Type": "application/json"
-			  },
-			  body: JSON.stringify({email: email})
-			}).then((response) => response.json())
-			.then((data) => {
-				
-					if(data>0){
-						if(document.getElementById("mail-check-warn").innerHTML == "인증번호가 일치합니다."){
-							//let email = $('#userEmail1').val() + $('#userEmail2').val();
-							location.href="${pageContext.request.contextPath}/gomembership?email="+email;
-						}
-					}else{
-						alert("가입된 이메일이 있습니다!")
-						document.getElementById("userEmail1").value = "";
-						document.getElementById("inputCheck").value = "";
-						
-						 $('#mail-Check-Btn').attr('disabled',false);
-				         $('#userEamil1').attr('readonly',false);
-				         $('#userEamil2').attr('readonly',false);
-				         $('#mail-check-warn').hide();
-				         $('.mail-check-input').attr('disabled',true);
-						
-						return false;
-					}
-				}
-			);
-	/* if(document.getElementById("mail-check-warn").innerHTML == "인증번호가 일치합니다."){
+	if(document.getElementById("mail-check-warn").innerHTML == "인증번호가 일치합니다."){
 		let email = $('#userEmail1').val() + $('#userEmail2').val();
 		location.href="${pageContext.request.contextPath}/gomembership?email="+email;
 	}else{
 		alert("이메일 인증을 완료해주세요!")
-	} */
+	}
 	
 })
 $('#mail-Check-Btn').click(function(e) {

@@ -156,7 +156,7 @@ li {
 @media ( max-width : 1024px) {
 	.flex-container {
 		display: grid;
-		width: 100%;
+		width: 60%;
 		height: 86vh;
 		justify-content: center;
 		grid-template-columns: 50% 50%;
@@ -166,12 +166,22 @@ li {
 		gap: 3%;
 		z-index: -1;
 	}
+	
+		main{
+	height:0%;
+	}
+	#pageBtn{
+	display:none;
+	}
 }
 
 @media ( max-width : 540px) {
+	main{
+	height:0%;
+	}
 	.flex-container {
 		display: grid;
-		width: 100%;
+		width: 60%;
 		height: 86vh;
 		justify-content: center;
 		grid-template-columns: 100%;
@@ -179,6 +189,10 @@ li {
 		margin-top: 5%;
 		gap: 3%;
 		z-index: -1;
+		margin-right:15%;
+	}
+	#pageBtn{
+	display:none;
 	}
 }
 </style>

@@ -77,7 +77,7 @@
 		select * from ordertable as ot 
 		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
 		INNER JOIN product ON product.product_id = do.product_id 
-		where id=#{id} and do.order_status Not in ('주문 취소','반품 신청')
+		where id=#{id} and do.order_status Not in ('주문취소','반품신청')
 	</select>
 
 	<select id="getPdList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
@@ -93,7 +93,13 @@
 		select * from ordertable as ot 
 		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
 		INNER JOIN product ON product.product_id = do.product_id 
-		where id=#{id} and do.order_status Not in ('주문 취소','반품 신청') LIMIT #{stPage},#{pageCount}
+		where id=#{id} and do.order_status Not in ('주문취소','반품신청') LIMIT #{stPage},#{pageCount}
+	</select>
+	<select id="getCancelList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from ordertable as ot 
+		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
+		INNER JOIN product ON product.product_id = do.product_id 
+		where id=#{id} and do.order_status in ('주문취소','반품신청') LIMIT #{stPage},#{pageCount}
 	</select>
 	<select id="getPdListCnt" resultType="Integer" parameterType="java.util.HashMap">
 		SELECT COUNT(*) FROM PRODUCT
@@ -107,7 +113,13 @@
 		select count(*) from ordertable as ot 
 		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
 		INNER JOIN product ON product.product_id = do.product_id 
-		where id=#{id} 
+		where id=#{id} and do.order_status Not in ('주문취소','반품신청')
+	</select>
+	<select id="getCancelListCnt" resultType="Integer" parameterType="java.util.HashMap">
+		select count(*) from ordertable as ot 
+		INNER JOIN detailorder as do ON ot.order_id= do.order_id 
+		INNER JOIN product ON product.product_id = do.product_id 
+		where id=#{id} and do.order_status in ('주문취소','반품신청')
 	</select>
 	<delete id="deleteWishAll" parameterType="map" >
 		delete from wishlist where wish_id in
@@ -127,10 +139,10 @@
 		insert into ordertable (product_id) values (#{productId})
 	</insert>
 	<update id="deleteOrder" parameterType="int">
-		update detailorder set order_status = "주문 취소" where order_id = #{orderId} 
+		update detailorder set order_status = "주문취소" where order_id = #{orderId} 
 	</update>
 	<update id="returnOrder" parameterType="int">
-		update detailorder set order_status = "반품 신청" where order_id = #{orderId} 
+		update detailorder set order_status = "반품신청" where order_id = #{orderId} 
 	</update>
 	
 </mapper>

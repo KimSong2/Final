@@ -27,7 +27,7 @@ public interface MemberDAO {
 	public int updateinfo(MemberVO vo);
 	/* public MemberVO getmemberinfo(@Param("memId") String id); */
 
-	public MemberVO findidmail(MemberVO vo);
+	public List<MemberVO> findidmail(MemberVO vo);
 	public List<MemberVO> findidphone(MemberVO vo);
 	
 	public MemberVO findpw(Map<String, String> map);

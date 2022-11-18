@@ -114,6 +114,7 @@ public class MemberService{
 		
 		//아이디찾기
 				public void findidmail(MemberVO vo, Model model) {
+					model.addAttribute("count", dao.findidmail(vo).size());
 					model.addAttribute("vo",dao.findidmail(vo));
 				}
 				public void findidphone(MemberVO vo, Model model) {

@@ -197,7 +197,7 @@
     margin: 10px;
     cursor:pointer;
 }
-#pageBtn{
+#pageBtn, #pageBtn2{
 
 width:100%;
 text-align:center;
@@ -305,11 +305,11 @@ text-align:center;
                                         	<td><h3>주문처리상태</h3></td>
                                     	</tr>
                                     
-                                   		<tbody id="tbody"></tbody>
+                                   		<tbody id="tbody2"></tbody>
                                    
                                     
                                 	</table>
-                               	<div id="pageBtn"></div>
+                               	<div id="pageBtn2"></div>
                             	</div>
                             </div>
                             <script type="text/javascript">
@@ -337,6 +337,7 @@ text-align:center;
         </main>
 
 	<input type="hidden" value="${list[0].id }" id="IdValue" />
+	<input type="hidden" value="${list[0].id }" id="IdValue2" />
         <footer>
             <%@ include file="../frame/main/footer.jsp" %>
         </footer>
@@ -469,6 +470,119 @@ text-align:center;
 					
 					$('#pageBtn').append(
 							'<button onclick="getCateList('+total+')" class="pagebtn">'+'\>\>'+'</button>'
+					);
+					
+ 				});
+			}
+			
+		</script>
+		<script>
+			var pageCount2=6;
+			getCancelList(1);
+
+			function getCancelList(page){
+			$('#tbody2').empty();
+				$('#pageBtn2').empty(); 
+				
+				var id = document.getElementById("IdValue").value;
+				
+				fetch("${pageContext.request.contextPath}/getCancelList", { 
+					method: "POST",
+ 				  	headers: {
+ 				    	"Content-Type": "application/json"
+ 				  	},
+ 				  	body:JSON.stringify({"id":id, "page":page, "pageCount":pageCount2})
+ 				}).then((response) => response.json())
+ 				.then((data) => {
+ 					console.log("11");
+					console.log(data);
+	
+				var productListDiv2= $("#tbody2");
+					
+				 	for(dict of data.list){
+				 		const date = new Date(dict.order_date);
+				 		console.log(date.toLocaleString());
+				 			
+							productListDiv2.append(
+							 "<tr>"
+                             +"<td>"+date.toLocaleString()+"<br>"+'['+dict.order_id+']'+"</td>"
+                              + "<td><img src='"+dict.product_image+"'></td>"
+                                +"<td>"+dict.product_name+"</td>"
+                                +"<td>"+dict.product_count+"</td>"
+                                +"<td>"+(dict.product_price*dict.product_count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+"</td>"
+                                +"<td>"+dict.order_status+"</td>"
+                              +"</tr>"
+                            )
+					} 
+				 	
+					
+					var total=0;
+					var stNum;
+					var edNum;
+					var preNum;
+					var nextNum;
+					
+					total = parseInt(data.total/pageCount2);
+					
+					if(parseInt(data.total%pageCount2)!=0){
+						total++;
+					}
+					
+					stNum=parseInt(parseInt(page/10)*10);
+					
+					if(parseInt(page%10)!=0){
+						stNum++;
+					}else{
+						stNum-=9
+					}
+					
+					edNum = stNum + 10;
+					
+					edNum=parseInt(parseInt(edNum/10)*10);
+					
+					if(edNum>total){
+						edNum=total;
+					}
+					
+					
+					if(page==1){
+						preNum=1;
+					}else{
+						preNum=page-1;
+					}
+					if(page==total){
+						nextNum=total;
+					}else{
+						nextNum=page+1;
+					}
+					
+					$('#pageBtn2').append(
+							'<button onclick="getCancelList(1)" class="pagebtn">'+'\<\<'+'</button>'
+					);
+					
+					$('#pageBtn2').append(
+							'<button onclick="getCancelList('+preNum+')" class="pagebtn">'+'\<'+'</button>'
+					);
+					
+					for(var i=stNum;i<=edNum;i++){	
+						if(i==page){
+							$('#pageBtn2').append(
+									'<button onclick="getCancelList('+i+')" style="color:red;" class="pagebtn">'+i+'</button>'
+							);
+						}else{
+							$('#pageBtn2').append(
+									'<button onclick="getCancelList('+i+')" class="pagebtn">'+i+'</button>'
+							);
+						}
+						
+					}
+					
+					$('#pageBtn2').append(
+							'<button onclick="getCancelList('+nextNum+')" class="pagebtn">'+'\>'+'</button>'
+					);
+					
+					$('#pageBtn2').append(
+							'<button onclick="getCancelList('+total+')" class="pagebtn">'+'\>\>'+'</button>'
 					);
 					
  				});

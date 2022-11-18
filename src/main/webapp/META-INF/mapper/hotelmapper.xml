@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.dao.HotelDAO">
 	<select id="selectRanHotel" resultType="hotelVO">
-	select hotel_id, hotel_name, hotel_addr, hotel_category, hotel_tel, hotel_thum, hotel_img
+	select hotel_id, hotel_name, hotel_addr, hotel_category, hotel_tel, hotel_thum
 		from hotel_info
 		where hotel_id in 
 		<foreach item="ran" index="id" collection="ran" open="(" separator="," close = ")">
@@ -13,7 +13,7 @@
 	</select>
 	<!-- 지역구 값 받아서 해당 정보 출력 -->
 	<select id="selectHotelList" resultType="hotelVO">
-	select hotel_id, hotel_name, hotel_addr, hotel_category, hotel_tel, hotel_thum, hotel_img
+	select hotel_id, hotel_name, hotel_addr, hotel_category, hotel_tel, hotel_thum
 		from hotel_info
 		where hotel_category in 
 		<foreach item="cate" index="id" collection="list" open="(" separator="," close = ")">

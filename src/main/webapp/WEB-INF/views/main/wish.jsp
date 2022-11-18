@@ -354,35 +354,7 @@ text-align:center;
 									</tr>
 								</c:if>
 								
-								<script>
-                  			function selectAll(selectAll)  {
-                  		  		const checkboxes = document.getElementsByName('productIds');
-                  		  
-                  		  		checkboxes.forEach((checkbox) => {
-                  		    		checkbox.checked = selectAll.checked;
-                  		  		})
-                  			}
-                  		 
-                        	var buttons = document.getElementsByClassName("deletewish");
-                        	var orderbtns = document.getElementsByClassName("orderbtns");
-                        	let wishnum = document.getElementsByClassName("wishnum");
-                        	let productId = document.getElementsByClassName("productId");
-                        	let options = document.getElementsByClassName("options");
-                        	let counts = document.getElementsByClassName("product-count");
-                        	for(let i = 0 ; i< buttons.length ; i++ ){
-                        		buttons[i].addEventListener("click",function(){
-                        			if(confirm('장바구니에서 삭제하시겠습니까?')){
-                        				location.href="${pageContext.request.contextPath}/deletewish/"+wishnum[i].value;                        			
-                        			}
-                        		});
-                        		orderbtns[i].addEventListener("click",function(){
-                        			if(confirm('해당 상품을 주문하시겠습니까?')){
-                        				location.href="${pageContext.request.contextPath}/shop/pay2/"+productId[i].value+"?option="+options[i].innerText+"&count="+counts[i].innerText+"&wishId="+wishnum[i].value;                        			
-                        			}
-                        		});
-                        	}
-                        	
-                        </script>
+							
 								<tr>
 									<td colspan="2">[업체기본배송]</td>
 									<td colspan="8"><span>전체 합계 금액: &nbsp;<span id="allprice"></span>원
@@ -403,8 +375,6 @@ text-align:center;
 							<div id="pageBtn">
 							</div>
 							<script>
-                	
-                	
                 	if(document.getElementById("total-order")){
 						document.getElementById("total-order").addEventListener("click",function(){
 							let checkvals = []
@@ -487,8 +457,34 @@ text-align:center;
 						+"<br>"
 					+"<button class='deletewish'>삭제</button></td>"
 					+"</tr>")
-					}
 					
+					}
+					function selectAll(selectAll)  {
+          		  		const checkboxes = document.getElementsByName('productIds');
+          		  
+          		  		checkboxes.forEach((checkbox) => {
+          		    		checkbox.checked = selectAll.checked;
+          		  		})
+          			}
+          		 
+                	var buttons = document.getElementsByClassName("deletewish");
+                	var orderbtns = document.getElementsByClassName("orderbtns");
+                	let wishnum = document.getElementsByClassName("wishnum");
+                	let productId = document.getElementsByClassName("productId");
+                	let options = document.getElementsByClassName("options");
+                	let counts = document.getElementsByClassName("product-count");
+                	for(let i = 0 ; i< buttons.length ; i++ ){
+                		buttons[i].addEventListener("click",function(){
+                			if(confirm('장바구니에서 삭제하시겠습니까?')){
+                				location.href="${pageContext.request.contextPath}/deletewish/"+wishnum[i].value;                        			
+                			}
+                		});
+                		orderbtns[i].addEventListener("click",function(){
+                			if(confirm('해당 상품을 주문하시겠습니까?')){
+                				location.href="${pageContext.request.contextPath}/shop/pay2/"+productId[i].value+"?option="+options[i].innerText+"&count="+counts[i].innerText+"&wishId="+wishnum[i].value;                        			
+                			}
+                		});
+                	}
 					
 					var total=0;
 					var stNum;
@@ -563,33 +559,7 @@ text-align:center;
  				});
 			}
 		</script>
-		<script>
-                    	let totalprice = document.getElementsByClassName("total-price");
-                    	let proprice = document.getElementsByClassName("product-price");
-                    	let count = document.getElementsByClassName("product-count");
-                    	let point = document.getElementsByClassName("point");
-                    	let result = 0;
-                    	
-                    	for(let i = 0; i< totalprice.length; i++){
-                    		let a = stringNumberToInt(proprice[i].innerText)*Number(count[i].innerText);
-                    		
-                    		totalprice[i].innerText = priceToString(a);
-                    		point[i].innerText = priceToString(a/100);
-                    		result = result+a;
-                    	}
-                    	document.getElementById("allprice").innerText = priceToString(result);
-                    	
-                    	
-                    	/* 1000단위 ,찍혀있는 문자를 숫자로*/
-                    	function stringNumberToInt(stringNumber){
-                    	    return parseInt(stringNumber.replace(/,/g , ''));
-                    	}
-                    	/* 숫자를 1000단위 ,찍혀있는 문자로*/
-                    	function priceToString(price) {
-                    	    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                    	}
-                    	
-                    </script>
+			
 		
 </body>
 
