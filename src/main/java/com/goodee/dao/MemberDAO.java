@@ -32,6 +32,8 @@ public interface MemberDAO {
 	
 	public MemberVO findpw(Map<String, String> map);
 	
+	public MemberVO checkEmail(Map<String, String> map);
+	
 	public int updatepw(MemberVO vo);
 
 }

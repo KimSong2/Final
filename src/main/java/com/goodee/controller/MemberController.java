@@ -145,4 +145,19 @@ public class MemberController {
 			}
 			
 		}
+		
+		@PostMapping("/checkEmail")
+		@ResponseBody
+		public int checkEmail(@RequestBody Map<String, String> map) {
+		
+			System.out.println("체크메일"+map.get("email"));
+			
+			if(mbservice.checkEmail(map) != null) {
+				System.out.println("메일 있음");
+				return 0;
+			} else {
+				return 1;
+			}
+		       
+		}
 }

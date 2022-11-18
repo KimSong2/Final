@@ -55,6 +55,11 @@
 <update id="updatepw" parameterType="memberVO">
 	update member set mem_pw = #{memPw} where mem_id = #{memId} and mem_name = #{memName} and mem_email=#{memEmail};
 	</update>
+	
+	<select id="checkEmail" parameterType="map" resultType="memberVO">
+		SELECT * FROM member 
+		 where mem_email = #{email};
+	</select>
 </mapper>
 
 
