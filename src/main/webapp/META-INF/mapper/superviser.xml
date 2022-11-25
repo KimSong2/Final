@@ -14,12 +14,15 @@
 	insert into product_option (product_id, option) values (#{productId},#{option})
 	</insert>
 	<update id="updateInfo" parameterType="shopVO">
-	update product set product_name= #{productName}, product_shop = #{productShop}, product_total = #{productTotal} ,product_image = #{productImage}, product_content = #{productContent}, product_category=#{productCategory},product_total=#{productTotal},product_price=#{productPrice},product_opt=#{productOpt}
+	update product set product_name= #{productName}, product_shop = #{productShop}, product_total = #{productTotal} ,product_image = #{productImage}, product_content = #{productContent}, product_category=#{productCategory},product_total=#{productTotal},product_price=#{productPrice}
 	where product_id = #{productId}
 	</update>
 	
 	   <delete id="godelete" parameterType="int">
       delete from product where product_id=#{productId}
+   </delete>
+      <delete id="deleteoption" parameterType="int">
+      delete from product_option where product_id=#{productId}
    </delete>
    
 	<update id="deleteBoard" parameterType="boardVO">
@@ -46,8 +49,8 @@
 	
 	
 	<insert id="createboard" parameterType="boardVO">
-	insert into board (board_title,board_content,board_category,is_delete,id)
-	values( #{boardTitle}, #{boardContent}, #{boardCategory}, #{isDelete} ,#{id})
+	insert into board (board_title,board_content,board_category,is_delete)
+	values( #{boardTitle}, #{boardContent}, #{boardCategory}, #{isDelete} )
 	</insert>
 	
 	<select id="getCSOrder" resultType="orderjoinVO" parameterType="String">

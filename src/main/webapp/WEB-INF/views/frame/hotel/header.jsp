@@ -5,7 +5,7 @@
 <nav id="nav1">
         <ul>
           <li><a href="${pageContext.request.contextPath}/goshop">shop</a></li>
-          <li><h2>Hotel</h2></li>
+          <li><h2><a href="${pageContext.request.contextPath}/gohotel">Hotel</a></h2></li>
         </ul>
       </nav>
       <div>
@@ -106,9 +106,9 @@
                    }
               </script>
               <p style="font-size: 11px; border-bottom:1px solid black; width:130px; margin-top:10px;" >혹시 회원이 아니신가요??</p>
-              <a href="${pageContext.request.contextPath}/membership" style="font-size:13px">회원 가입</a>
-              <div class="find">
-            	<a href="${pageContext.request.contextPath}/findid" style="font-size:12px">아이디 찾기</a> <span style="font-size:12px">&nbsp;/&nbsp;</span><a href="${pageContext.request.contextPath}/findpw" style="font-size:12px">비밀번호 재설정</a>
+              <a href="${pageContext.request.contextPath}/membership " style="font-size:13px; margin:5px 0 ;">회원 가입</a>
+              <div class="find" >
+            	<a href="${pageContext.request.contextPath}/findid" style="font-size:12px;margin:3px 0 ;">아이디 찾기</a> <span style="font-size:12px; margin:3px 0 ;">&nbsp;/&nbsp;</span><a href="${pageContext.request.contextPath}/findpw" style="font-size:12px;margin:3px 0 ;">비밀번호 재설정</a>
             	</div>
             </div>
             </li>

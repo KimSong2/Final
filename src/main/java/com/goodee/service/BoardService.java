@@ -1,5 +1,7 @@
 package com.goodee.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -19,4 +21,5 @@ public class BoardService {
 	public void selectList(Model model, String boardId) {
 		model.addAttribute("list",dao.selectList(boardId));
 	}
+	
 }

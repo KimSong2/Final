@@ -189,11 +189,7 @@
                                 <p>다음정보로 가입된 아이디가 없습니다.</p>
                                  <a href="${pageContext.request.contextPath}/membership" style="font-size:13px">회원 가입</a>
                             </div>
-                            
-                            
-                          
-                          
-                        </div>
+                         </div>
                        </c:when>
                       </c:choose>
                     </section>

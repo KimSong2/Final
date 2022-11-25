@@ -95,7 +95,6 @@ public class MemberController {
 	//아이디찾기
 		@GetMapping("/findidmail")
 		public String findidmail(MemberVO vo, Model model) {
-	
 				mbservice.findidmail(vo, model);
 			
 			return "main/sucfindid";
@@ -103,8 +102,6 @@ public class MemberController {
 		
 		@GetMapping("/findidphone")
 		public String findidphone(MemberVO vo, Model model) {
-
-			System.out.println("폰실행");
 				mbservice.findidphone(vo, model);
 			
 			
@@ -131,12 +128,7 @@ public class MemberController {
 		
 		@GetMapping("/repw")
 		public String repw(MemberVO vo) {
-			System.out.println("컨트롤러");
-			System.out.println("여기용"+vo.getMemId());
-			System.out.println("여기용"+vo.getMemEmail());
-			System.out.println("여기용"+vo.getMemName());
-			System.out.println("여기용"+vo.getMemPw());
-			
+
 			if(mbservice.updatepw(vo)) {
 				
 				return "main/main";
@@ -152,7 +144,7 @@ public class MemberController {
 		
 			System.out.println("체크메일"+map.get("email"));
 			
-			if(mbservice.checkEmail(map) != null) {
+			if(mbservice.checkEmail(map.get("email")) != null) {
 				System.out.println("메일 있음");
 				return 0;
 			} else {

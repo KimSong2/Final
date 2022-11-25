@@ -2,18 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
-	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
-
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
 
 <title>Insert title here</title>
 <style>
@@ -290,7 +288,7 @@ a {
                             console.log('${pageContext.request.contextPath}');
                             productListDiv.append('<div class="list">'
                                     +'<a href="'+'${pageContext.request.contextPath}'+'/shop/delete/main/'+dict.product_id+'">'
-                                    +'<img src="'+dict.product_image+'" alt="">'
+                                    +'<img src="${pageContext.request.contextPath}/'+dict.product_image+'" alt="">'
                                     +'<p>'+dict.product_name+'</p>'
                                     +'<h3>'
                                     +dict.product_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'

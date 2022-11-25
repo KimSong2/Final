@@ -1,5 +1,7 @@
 package com.goodee.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -27,8 +29,10 @@ public class NuriService {
 				model.addAttribute("hotel", null);
 			}else {
 				model.addAttribute("hotel", dao.searchhotel("%"+search+"%"));
+				
 			}
 		}
 	}
+	
 	
 }

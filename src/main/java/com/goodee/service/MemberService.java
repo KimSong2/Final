@@ -81,7 +81,7 @@ public class MemberService{
 				//이메일 보낼 양식! 
 		public Map<String,String> joinEmail(Map<String, String> email) {
 			makeRandomNumber();
-			String setFrom = "kimsong2_0325@naver.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
+			String setFrom = "dengnuri@naver.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 			String toMail = email.get("email");
 			String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목 
 			String content = 
@@ -134,9 +134,8 @@ public class MemberService{
 					return (i>0)?true:false;
 				}
 				
-				public MemberVO checkEmail(Map<String, String> map) {
-					System.out.println("서비스"+dao.checkEmail(map).getMemEmail());
-					System.out.println("서비스"+dao.checkEmail(map).getMemName());
-					return dao.checkEmail(map);
+				public MemberVO checkEmail(String email) {
+					
+					return dao.checkEmail(email);
 				}
 }

@@ -38,16 +38,12 @@ public class HotelController {
 	@GetMapping("golist/{startDate}/{endDate}/{cate}")
 	public String golist(@PathVariable("startDate") String startdate, @PathVariable("endDate") String enddate, @PathVariable("cate") String[] category,
 						Model model) {
-		System.out.println(startdate);
-		System.out.println(enddate);
-		/* System.out.println(category.length); */
 		
 		String stringcate = Arrays.toString(category);
-		System.out.println(stringcate);
+
 		
 		model.addAttribute("startdate", startdate);
 		model.addAttribute("enddate", enddate);
-		model.addAttribute("category", stringcate);
 		
 		service.getHotelList(model, category, startdate, enddate);
 		
@@ -56,10 +52,6 @@ public class HotelController {
 			
 	@GetMapping("godetail/{hotelId}/{startDate}/{endDate}")
 	public String godetail(@PathVariable("hotelId") int hotelId, @PathVariable("startDate") String startdate, @PathVariable("endDate") String enddate, Model model) {
-		
-		System.out.println("컨트롤러호텔아이디"+hotelId);
-		System.out.println("스타트"+startdate);
-		System.out.println("엔드"+enddate);
 		
 		model.addAttribute("startdate", startdate);
 		model.addAttribute("enddate", enddate);

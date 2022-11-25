@@ -382,14 +382,20 @@ font {
 						</p>
 						<p id="p-line1">MADE IN KOREA</p>
 						<br>
-						<button>제품을 삭제하겠습니다.</button>
+						<button id="btn">제품을 삭제하겠습니다.</button>
 						
 					</div>
 				</div>
 			</div>
 			</form>
 		</main>
-		
+		<script type="text/javascript">
+			document.getElementById("btn").addEventListener("click",function(){
+				if(confirm("제품을 삭제하시겠습니까?")){
+					
+				}
+			})
+		</script>
 		<footer>
 			<%@ include file="../frame/main/footer.jsp"%>
 		</footer>

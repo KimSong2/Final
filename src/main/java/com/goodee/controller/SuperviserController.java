@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.service.BoardService;
@@ -166,7 +167,7 @@ public class SuperviserController {
 	   
 	   @GetMapping("delete/success/{productId}")
 	   public String deleteProc(@PathVariable int productId) {
-	      System.out.println("오나보까");
+	    
 	      superservice.godelete(productId);
 	      return "/superviser/viser-main";
 	   }

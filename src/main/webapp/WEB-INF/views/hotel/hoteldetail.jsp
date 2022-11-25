@@ -548,7 +548,7 @@
                     <div class="content">
                         <div class="c_title">
                         	<div id="hotel-img">
-                        		<img src="https://www.qplace.kr/content/images/2021/09/9-14.jpg">
+                        		<img src="${pageContext.request.contextPath}/${hotel[0].hotelThum}">
                         	</div>
                         	<div id="hotel-info">
                         		<div>
@@ -605,7 +605,7 @@
                             	<div style="display: none;" class="info-container-div">
                             		<h1>Review</h1>
                             		<p>호텔의 방문후기를 작성해주세요</p><hr/>
-                            		&nbsp;&nbsp;<h3>후기 <span id="review-count"></span>개</h3>
+                            		&nbsp;&nbsp;<h3>후기 </h3>
                             		<div id="review-container">
                             			
                             			
@@ -769,7 +769,7 @@
 		                                }).then(response => response.json())
 		                                    .then(data => {
 		                                    	$("#review-container").empty();
-		                                        document.getElementById("review-count").innerText = data.length;
+		                                        
 		                                        if(data.length>0){
 		                                        	for (let review of data) {
 		                                    			const div = document.createElement("div");

@@ -123,42 +123,54 @@ margin-top:20px;
    .art3-Q{
     color: darkcyan;
     font-size: 1.3rem;
-    margin-right: 1.5rem;
+padding: 0 1rem;
    }
 
    .art3-question{
+       padding-top: 30px;
    display: flex;
    align-items:center;
   
-    border-bottom: 2px solid black;
+   
    
     cursor: pointer;
     
    }
    input:focus {outline: none;}
-	.art3-question input{
+	/* .art3-question input{
 	width:80%;
 	 font-weight: 600;
 	 font-size: 1.3rem;
     height:90px;
     color: rgb(70, 68, 68);
     border:none;
+	} */
+	
+	.art3-P{
+	width:85%;
+	 font-weight: 600;
+	 font-size: 1.3rem;
+    color: rgb(70, 68, 68);
+    border:none;
+    margin : 0;
 	}
-	.art3-content input{
+	
+	/* .art3-content input{
 	width:80%;
 	 font-weight: 600;
 	 font-size: 1rem;
     
     color: rgb(70, 68, 68);
     border:none;
-	}
+	} */
    .art3-content{
-   
+
     border-bottom: 2px solid black;
     font-weight: 600;
     color: rgb(70, 68, 68);
-    
-    display: none;
+    padding: 15px 0px 30px;
+     display: flex;
+    align-items:center;
    }
 	.art3-content h4{
 	
@@ -166,7 +178,8 @@ margin-top:20px;
    }
    
    .display-block{
-    display: block;
+    display: flex;
+    align-items:center;
    }
 
 
@@ -187,17 +200,15 @@ margin-top:20px;
             width:50vw;
         }
         #art2 {
-            
+            margin : 0 auto;
             flex:5;
-            width:70vw;
+            width:65vw;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        #art2 div{
-            width:85%;
-        }
+        
  
   
   form{
@@ -253,6 +264,29 @@ text-align:center;
   text-align:left;
   margin-left:300px;
   }
+  
+  .art3-in {
+  width : 85%;
+  display: flex;
+    flex-direction: column;
+    gap: 1vh;
+  }
+  
+  .art3-in>input {
+  	width: 70%;
+    border: none;
+    border-bottom: 1px solid grey;
+    height: 25px;
+
+  }
+  .btnbox {
+  width:10%;
+	 display: flex;
+    align-items: center;
+  }
+  .btnbox>button {
+  	width:50%;
+  }
 </style>
 
 </head>
@@ -283,56 +317,59 @@ text-align:center;
 			</div>
 			<div id="sec2"><h1 class="h1">자주묻는질문/수정/삭제</h1>
 			     <article id="art2">
-                        <c:forEach var="item" items="${list}"> 
-                       <form action="${pageContext.request.contextPath}/viser/delete/modify">
-                        	<div class="art3-question" class="tab_title">
-                        	 
-                              	<span class="art3-Q">Q</span> <input type="text" value="${item.boardTitle}" name="boardTitle"/>
-                              	<input type="hidden" name="boardId" value="${item.boardId}"/>
-                           	</div>
-                     
-                            <div class="art3-content">
-                           		<h4><span class="art3-Q">N</span><input type="text" value="${item.boardContent}" name="boardContent"/></h4><br />
-                           		 1 == 삭제, 0 == 수정 // 상태: ${item.isDelete}
-                           		
-                           		 <button class="btn1" id="btn1">수정</button>
-                           		 <button class="btn2" id="btn2">삭제</button>
-                           		   
-                            </div>
-                             <input type="hidden" name="isDelete" id="delete" class="delete" value=""/>
-                         </form>
- 							</c:forEach>
+			    			<div class="create">
+ 								<form class="create-form" action="${pageContext.request.contextPath}/viser/create/modify">
+									<h1 class="h2">자주묻는질문 새로 추가하기</h1>
+										<label for="boardTitle"><h2 class="h2">제목</h2></label> <input type="text" id="CTT" name="boardTitle" placeholder="제목을 입력하세요" value=""/><br />
+										<label for="boardContent"><h2 class="h2">내용</h2></label> <input type="text" id="CCT" name="boardContent" placeholder="내용을 입력하세요" value=""/><br />
+										<button>생성하기</button> <button id="btn3">생성 내용 미리보기</button>
+										<input type="hidden" name="boardCategory" value="자주묻는질문"/>
+										<input type="hidden" name="isDelete" value="0"/>
+										<input type="hidden" value="${mem.id}" name="id" />
+											<div class="div-container">
+												<h2>생성 제목 : <span id="CT"></span> </h2>
+												<h3>생성 내용 : <span id="CC"></span> </h3>
+											</div>
+								</form>
+							</div>
+                       <c:forEach var="item" items="${list}"> 
+                       		<form action="${pageContext.request.contextPath}/viser/delete/modify">
+                        		<div class="art3-question" class="tab_title">
+                        			<p class="art3-Q">Q</p>
+                        			<div class="art3-in">
+                        				<p class="art3-P">${item.boardTitle}</p>
+                        	 			<input type="text"  name="boardTitle" placeholder="수정할 내용을 입력해주세요."/>
+                              			<input type="hidden" name="boardId" value="${item.boardId}"/>
+                              		</div>
+                           		</div>
+                     			<div class="art3-content">
+                     				<p class="art3-Q">A</p>
+                     				<div class="art3-in">
+                        				<p class="art3-P">${item.boardContent}</p>
+                              			<input type="text" name="boardContent" placeholder="수정할 내용을 입력해주세요."/>
+                              			
+                              		</div>
+                           			
+                           			<%-- <p>1 == 삭제, 0 == 수정 // 상태: ${item.isDelete}</p> 필요한가? --%>
+                           			<div class="btnbox">
+                           				<button class="btn1" id="btn1">수정</button>
+                           		 		<button class="btn2" id="btn2">삭제</button>
+                           		 	</div>
+                           		</div>
+                             	<input type="hidden" name="isDelete" id="delete" class="delete" value=""/>
+                         	</form>
+ 						</c:forEach>
  							
- 							<div class="create">
- 							
-							<form class="create-form" action="${pageContext.request.contextPath}/viser/create/modify">
-							<h1 class="h2">자주묻는질문 새로 추가하기</h1>
-							
-							<label for="boardTitle"><h2 class="h2">제목</h2></label> <input type="text" id="CTT" name="boardTitle" placeholder="제목을 입력하세요" value=""/><br />
-							<label for="boardContent"><h2 class="h2">내용</h2></label> <input type="text" id="CCT" name="boardContent" placeholder="내용을 입력하세요" value=""/><br />
-							<button>생성하기</button> <button id="btn3">생성 내용 미리보기</button>
-							<input type="hidden" name="boardCategory" value="자주묻는질문"/>
-							<input type="hidden" name="isDelete" value="0"/>
-								<input type="hidden" value="${mem.id}" name="id" />
-							<div class="div-container">
-							<h2>생성 제목 : <span id="CT"></span> </h2>
-							<h3>생성 내용 : <span id="CC"></span> </h3>
-							</div>
-							</form>
-							</div>
-							
- 							</article>
-							</div>
-			
-							</main>
-		
-							<footer>
+ 						</article>
+					</div>
+				</main>
+			<footer>
 		
 			<%@ include file="../frame/main/footer.jsp"%>
 		</footer>
 		</div>
 		  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                          <script>
+                          <!-- <script>
                           for(let i = 0; i<document.getElementById("art2").children.length; i++){
                               
                         	  document.getElementsByClassName("art3-question")[i].addEventListener("click",function(){
@@ -349,7 +386,7 @@ text-align:center;
                                   });
                           } 
 
-                                       </script>
+                                       </script> -->
                                        <script>
                                        document.getElementById("btn3").addEventListener("click",function(e){
                                 			

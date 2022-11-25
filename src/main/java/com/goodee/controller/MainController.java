@@ -1,6 +1,7 @@
 package com.goodee.controller;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -140,5 +141,6 @@ public class MainController {
 	public String findpw() {
 		return "main/findpw";
 	}
+	
 	
 }

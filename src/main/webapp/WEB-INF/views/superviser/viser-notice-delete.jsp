@@ -114,14 +114,13 @@ a:hover {
    }
   
    .art3-container{
-    width: 80%;
+    flex:8;
     margin: 0 auto;
     display: flex;
-    border: 1px solid darkblue;
-    border-radius:10px;
-    height: 140px;
+   
     align-items: center;
     overflow: hidden;
+    gap:1vw;
    }
    .art3-container button{
    width:50px;
@@ -145,16 +144,18 @@ a:hover {
     border-radius: 1rem;
   }
   .art3-first{
-    width: 100%;
-    min-width: 200px;
-    margin-left: 40px;
+  	flex:4;
    
   }
   .art3-first a{
   margin-left : 10px;
   }
   .art3-second{
-    width: 1300px;
+    flex:6;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    gap:10px;
     
   }
   .art3-third{
@@ -168,11 +169,10 @@ a:hover {
   margin-top:20px;
   margin-bottom:20px;
   }
-  #boardContent{
-  width:100%;
-  }
+  
   #boardId{
   width:15px;
+      border: none;
   }
   .create{
  
@@ -195,18 +195,10 @@ a:hover {
     border-radius:1rem;
   }
   #boardTitle{
-  margin-left:5px;
-  border-radius:7px;
-  width:250px;
-  height:30px;
-  border:1px solid darkblue;
+height: 20px;
+    width: 50%;
   }
-  textarea{
-  border-radius:7px;
-   border:1px solid darkblue;
-   height:70px;
-   
-  }
+  
   .create button{
   margin-top:15px;
   margin-bottom:15px;
@@ -231,12 +223,42 @@ a:hover {
   text-align:center;
   }
   .btn-container{
-  width:100%;
-  text-align:center;
+      gap: 10px;
+  
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
   }
   .div-container{
   text-align:left;
   margin-left:300px;
+  }
+  
+  .modiform {
+ 	 width: 85%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 25px 0px;
+    border-bottom: 1px solid #ededed;
+    gap: 1vw;
+  }
+  
+  .art3-first-in {
+  display: flex;
+    gap: 1rem;
+  }
+  
+  .art3-first-in > p {
+  margin : 0;
+  }
+  
+  textarea {
+  resize:none;
+  flex: 4;
+    width: 98%;
   }
 </style>
 
@@ -268,45 +290,57 @@ a:hover {
 			</div>
 			<div id="sec2">
 			    <article class="art3">
-        <h1 class="h1">공지사항/수정/삭제</h1>
-        <c:forEach var="item" items="${list}">
-        <form action="${pageContext.request.contextPath}/viser/delete/modify">
-      <div class="art3-container">
-        <div class="art3-first"><span class="art3-container-span">제목</span><input type="text" name="boardTitle" id="boardTitle" value="${item.boardTitle}"/></div>
-        <div class="art3-second">
-        <label for="boardId">수정/삭제할 번호</label><input type="text" name="boardId" id="boardId" value="${item.boardId}" readonly/>
-        <label for="boardContent">수정할 내용</label><textarea name="boardContent" id="boardContent">${item.boardContent}</textarea><br />
-        <input type="hidden" name="isDelete" id="delete" class="delete" value=""/>
-        <div class="btn-container">
-        <button class="btn1" id="btn1">수정</button><button class="btn2" id="btn2">삭제</button>
-        </div>
-        </div>
-        <div class="art3-third">
-       
-        상태 : ${item.isDelete} <br />
-         1 == 삭제상태, 0 == 공개상태 <br /></div>
-      </div>
-   </form>
-    </c:forEach>
-    <div class="create">
-    <form class="create-form"  action="${pageContext.request.contextPath}/viser/create/modify">
+       				<h1 class="h1">공지사항/수정/삭제</h1>
+       				<div class="create">
+    					<form class="create-form"  action="${pageContext.request.contextPath}/viser/create/modify">
 							<h1 class="h2">공지사항 새로 추가하기</h1>
-							
 							<label for="boardTitle"><h2 class="h2">제목</h2></label> <input type="text" id="CTT" name="boardTitle" placeholder="제목을 입력하세요" value=""/><br />
 							<label for="boardContent"><h2 class="h2">내용</h2></label> <input type="text" id="CCT" name="boardContent" placeholder="내용을 입력하세요" value=""/><br />
 							<button>생성하기</button> <button id="btn3">생성 내용 미리보기</button>
 							<input type="hidden" name="boardCategory" value="공지사항"/>
 							<input type="hidden" name="isDelete" value="0"/>
-							<input type="hidden" value="${mem.id}" name="id" />
-							<div class="div-container">
-							<h2>생성 제목 : <span id="CT"></span> </h2>
-							<h3>생성 내용 : <span id="CC"></span> </h3>
-							</div>
-							</form>
-							</div>
-    </article>
-			</div>
-		</main>
+							<%-- <input type="hidden" value="${mem.id}" name="id" /> --%>
+								<div class="div-container">
+									<h2>생성 제목 : <span id="CT"></span> </h2>
+									<h3>생성 내용 : <span id="CC"></span> </h3>
+								</div>
+						</form>
+					</div>
+        			<c:forEach var="item" items="${list}">
+        			<form action="${pageContext.request.contextPath}/viser/delete/modify" class="modiform">
+      					<div class="art3-container">
+        					<div class="art3-first">
+        						<div class="art3-first-in">
+        						<input type="text" name="boardId" id="boardId" value="${item.boardId}" readonly/> 
+        							<p class="art3-container-span">제목</p>
+        							<p>${item.boardTitle}</p>
+        						</div>
+        						<p>${item.boardContent}</p>
+        						<%-- <input type="text" name="boardTitle" id="boardTitle" value="${item.boardTitle}"/> --%>
+        					</div>
+        					<div class="art3-second">
+        						
+        						<input type="text" name="boardTitle" id="boardTitle" placeholder="수정할 제목을 입력해주세요."/>
+        						<textarea name="boardContent" id="boardContent" placeholder = "수정할 내용을 입력해주세요."></textarea>
+        						<input type="hidden" name="isDelete" id="delete" class="delete" value=""/>
+        						
+        					</div>
+        					
+        					<%-- <div class="art3-third">
+       							상태 : ${item.isDelete} <br />
+         						1 == 삭제상태, 0 == 공개상태 <br />
+         					</div> --%>
+      					</div>
+      					<div class="btn-container">
+        					<button class="btn1" id="btn1">수정</button>
+        					<button class="btn2" id="btn2">삭제</button>
+        				</div>
+   					</form>
+    			</c:forEach>
+    			
+    		</article>
+		</div>
+	</main>
 		<footer>
 		
 			<%@ include file="../frame/main/footer.jsp"%>

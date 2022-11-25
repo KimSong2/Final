@@ -17,7 +17,15 @@ public class MemberVO {
 	private String memAddress;
 	private String memDetailaddress;
 	private String agree;
+	private String who;
 	
+	
+	public String getWho() {
+		return who;
+	}
+	public void setWho(String who) {
+		this.who = who;
+	}
 	public int getPoint() {
 		return point;
 	}

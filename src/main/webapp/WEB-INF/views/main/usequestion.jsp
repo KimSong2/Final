@@ -115,7 +115,11 @@
 	.art3-content h3{
     margin-left: 15px;
    }
-   
+   .art3-content p{
+   		padding: 10px 0;
+   		font-weight:400;
+    	height:70px;
+   }
    .display-block{
     display: block;
    }
@@ -260,7 +264,7 @@
                            	</div>
                        
                             <div class="art3-content">
-                           		<h4><span class="art3-Q">A </span> ${item.boardContent}</h4>
+                           		<p>${item.boardContent}</p>
                             </div>
  							</c:forEach>
                     
@@ -298,20 +302,7 @@
                           
                     
                          
-//                           $(document).ready(function(){
-//                         	  $(".tab_title div").click(function(){
-//                         		  console.log("방가방가");
-//                         		  var idx = $(this).index();
-//                         		  $(".tab_title h4").removeClass("on");
-//                         		  $(".tab_title h4").eq(idx).addClass("on");
-//                         		  $(".tab_cont > h4").hide();
-//                         		  $(".tab_cont > h4").eq(idx).show();
-//                         		  console.log("사요나라");
-//                         	  })
-                        	  
-//                           });
-                          
-                          
+
                           </script>
 </body>
 

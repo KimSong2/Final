@@ -829,7 +829,7 @@
                                             				<button class="detail ${roomitem.roomType }">객실상세보기</button>
                                             				
 															<p>
-                                                				<fmt:formatNumber type="currency" value="${roomitem.roomPrice}" />
+                                                				<fmt:formatNumber value="${roomitem.roomPrice}" pattern="#,###"/>KRW
                                             				</p>
                                         				</div>
                                         			</div>

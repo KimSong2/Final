@@ -180,7 +180,7 @@ public class ShopService {
 		inParam.put("stPage", (Integer.parseInt(inParam.get("page").toString())-1)*Integer.parseInt(inParam.get("pageCount").toString()));
 		list = dao.getCancelList(inParam);
 		
-		dataMap.put("list", list);
+		dataMap.put("list1", list);
 		dataMap.put("total", dao.getCancelListCnt(inParam));		
 		return dataMap;
 	}

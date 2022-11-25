@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
@@ -46,7 +47,7 @@ public class SuperviserService  {
 
 	
 	   public void godelete(int productId) {
-		      System.out.println("오나안오나");
+		      superdao.deleteoption(productId);
 		      superdao.godelete(productId);
 		   }
 

@@ -260,12 +260,12 @@ li {
  				  	body:JSON.stringify({"category":category, "page":page, "pageCount":pageCount})
  				}).then((response) => response.json())
  				.then((data) => {
-					console.log(data);
+					
 	
 					var productListDiv=$("#productList");
 					
 					for(dict of data.list){
-						console.log('${pageContext.request.contextPath}');
+						
 						productListDiv.append('<div class="list">'
 								+'<a href="'+'${pageContext.request.contextPath}'+'/shop/main/buy/'+dict.product_id+'">'
 								+'<img src="${pageContext.request.contextPath}/'+dict.product_image+'" alt="">'

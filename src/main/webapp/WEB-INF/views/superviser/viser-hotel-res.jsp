@@ -24,8 +24,8 @@ overflow-x:hidden;
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 300px 1fr;
-	grid-template-rows: 120px 100px 1fr 120px;
-	grid-template-areas: 'header header' 'nav nav' 'main main'
+	grid-template-rows: 70px 1fr 70px;
+	grid-template-areas: 'header header'  'main main'
 		'footer footer';
 }
 
@@ -138,9 +138,7 @@ input {
 		<header>
         <%@ include file="../frame/viser/top.jsp"%>
         </header>
-		<nav>
-				<%@ include file="../frame/viser/header.jsp"%>
-		</nav>
+		
 		<main>
 			<div id="sec1">
 				<div id="menu-bar">

@@ -54,12 +54,15 @@ main{
 	padding-top:4rem;
 	border-right : 2px solid black;
 }
+#sec2{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 #sec2-form {
 	display: flex;
     flex-direction: column;
-    padding-top : 4rem;
-    padding-left : 4rem;
 
 }
 
@@ -94,8 +97,7 @@ a:hover {
 
 button {
 	width : 10rem;
-	margin-top : 2rem;
-	margin-left : 5rem;
+	margin: 1rem 0 1rem 5rem;
 }
 
 label {
@@ -114,9 +116,14 @@ p {
 
 
 input {
-	height : 20px;
+	height : 30px;
 	border-radius : 5px;
 	
+}
+.options{
+	width:169px;
+	margin-left:160px;
+	margin-bottom: 9px;
 }
 </style>
 
@@ -147,6 +154,7 @@ input {
 			</div>
 			</div>
 			<div id="sec2">
+			<h1 style="width:100%">&nbsp;&nbsp;상품 등록</h1>
 			<form id="sec2-form" action="${pageContext.request.contextPath}/viser/add-success" enctype="multipart/form-data" method="post">
 				<label for="proc_name"><p>상품 이름</p><input type="text" name="productName" id="proc_name"/></label>
 				<label for="proc_shop"><p>업체 이름</p><input type="text" name="productShop" id="proc_shop"/></label>
@@ -177,10 +185,24 @@ input {
 				<label><p>옵션</p><input name="options" type="text"></label><button type="button" id="plus-option">추가</button>
 				<script type="text/javascript">
 					document.getElementById("plus-option").addEventListener("click",function(){
+						let div = document.createElement("div");
 						let input = document.createElement("input");
 						input.setAttribute("name","options");
+						input.setAttribute("class","options");
 						input.setAttribute("type","options");
-						this.before(input);
+						let sp = document.createElement("span");
+						sp.innerText="  X";
+						sp.style.color="red";
+						sp.style.cursor="pointer";
+						sp.addEventListener("click",function(){
+							input.remove();
+							sp.remove();
+						})
+						div.append(input);
+						div.append(sp);
+						this.before(div);
+						
+						
 					});
 				</script>
 				

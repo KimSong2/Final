@@ -21,6 +21,7 @@ public interface SuperviserDAO {
 	public int addproc(ShopVO vo);
 
 	public void godelete(int productId);
+	public void deleteoption(int productId);
 	
 	public int updateInfo(ShopVO vo);
 	public int deleteBoard(BoardVO vo);
@@ -33,5 +34,7 @@ public interface SuperviserDAO {
 	public void addprodoption(ProductOptionVO opvo);
 	
 	public List<HotelViserVO> checkRes(HotelViserVO hotelviservo);
+
+	
 	
 }

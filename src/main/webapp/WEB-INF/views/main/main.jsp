@@ -257,8 +257,7 @@
       //스크롤 전체 높이                         //화면에 보이는 길이
       // 전체 화면 높이에 대한 퍼센트 추출
       let percent = (winScroll / height) * 100;
-      console.log(winScroll);
-      console.log(((200 - (percent * 3))<0)?0:(200 - percent * 3));
+      
       // progress-bar에 width 적용
       function fnscroll (a){
     	// 주석 제거시 섹션별로 덮는 효과  

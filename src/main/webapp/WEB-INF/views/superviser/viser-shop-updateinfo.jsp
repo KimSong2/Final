@@ -53,17 +53,15 @@ overflow-x:hidden;
 	align-items: center;
 	background-color:#f1f1f1;
 }
-		img{
-			width:100px;
-			height:100px;
-		}
+		
         #container {
             position: relative;
             width: 100%;
             height: 100%;
             display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: 70px 1fr 70px;
             grid-template-columns: 1fr;
+            
          
         }
 
@@ -71,7 +69,7 @@ overflow-x:hidden;
 
         main {
             width: 100%;
-            background-color: #f5ebe0;
+            
         
         }
 
@@ -94,7 +92,7 @@ overflow-x:hidden;
             height:100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            
             align-items: center;
         }
         
@@ -124,7 +122,7 @@ overflow-x:hidden;
        
         #sec2-div1 ul {
             width: 100%;
-            background-color: #f5ebe0;
+            background-color: white;
             font-size: 20px;
         }
         #sec2-div1 li {
@@ -181,29 +179,15 @@ overflow-x:hidden;
             margin-bottom: 5px;
         }
         .info-modify{
-            display: grid;
-            width: 1000px;
+
             margin: 0 auto;
-            margin-top: 5rem;
-        grid-template-columns: 1fr 1fr 1fr;
         }
         
-        form{
-            width: 1000px;
-        }
-        input{
-            
-            margin-bottom: 20px;
-            text-align: center;
-            width: 60%;
-            height: 40px;
-            font-size: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+       
+        
         label{
             display: inline-block;
-            width: 200px;
+            width: 100px;
 
         }
         #btn2,#btn1{
@@ -216,13 +200,11 @@ overflow-x:hidden;
             border: 1px solid white;
         }
        #btn1{
+       	cursor:pointer;
         display: inline-block;
-        margin-left:300px;
+        
        }
-        #btn1:hover,#btn2:hover{
-            background-color: white;
-            color: black;
-        }
+      
         .content::-webkit-scrollbar{
             overflow: scroll;
             
@@ -240,11 +222,7 @@ overflow-x:hidden;
 }
 
 .img img{
-   
-    
-   
-    width: 400px;
-    height: 400px;
+    width: 600px;
 }
 .first{
 margin-top:200px;
@@ -255,7 +233,10 @@ margin-top:200px;
 	height:500px;
 }
 #changeImg{
-display:none;
+	display:none;
+}
+.block{
+	display:block !important;
 }
 
 .info{
@@ -269,6 +250,28 @@ footer img{
 width:32px;
 height:32px;
 }
+#productInfo{
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:30px;
+	margin-top:50px;
+}
+#productInfo img{
+	width:400px;
+	height: 350px;
+}
+input{
+	width:200px;
+	margin-bottom:10px;
+	height:30px;
+	
+}
+.content{
+	width:150px;
+}
+.contentimg{
+	width:300px;
+}
     </style>
 </head>
 
@@ -281,64 +284,37 @@ height:32px;
 
         <main>
             <div id="main-container">
-                    
-                        <div id="artcontainer">
-							
-							<div class="info">
-							<h1>수정정보</h1>
-							</div>
-                            <div class="productinfo-grid">
-                            <div class="first">
-                                <h3>상품번호 : ${list.productId}</h3>
-                                <h3>상품명 : ${list.productName}</h3>
-                                <h3>상품샵 : ${list.productShop}</h3>
-                                <h3>상품가격 : ${list.productPrice}</h3>
-                                <h3>상품수량 : ${list.productTotal}</h3>
-                            </div>
-
-                            <div class="second">
-                                <h2>상품 이미지</h2>
-                                <img src="/FinalProject/${list.productImage}" alt="">
-                               
-                            </div>
-
-                            <div class="third">
-                            	<h2>상품 설명(장문)</h2>
-                                <img src="/FinalProject/${list.productContent}" alt="" />
-                            </div>
+                    <div id="productInfo">
+                    	<div>
+                    		<img alt="" src="${pageContext.request.contextPath}/${list.productImage}">
+                    	</div>
+                    	
+                    	<div>
+                    		<form action="${pageContext.request.contextPath}/viser/update">
+                    		<label for="productName">상품 번호</label><input type="text" class="content" name="productId" value="${list.productId}" readonly><br>
+                            <label for="productName">상품명</label><input type="text" class="content" name="productName" value="${list.productName}"><br>
+                            <label for="productShop">업체명</label><input type="text" class="content" name="productShop" value="${list.productShop}"><br>
                             
-                        </div>
-					
-				
+                            <label for="productCategory">상품 카테고리</label><input type="text" class="content" name="productCategory" value="${list.productCategory}"><br>
+                            <label for="productTotal">상품 수량</label><input type="number" class="content" name="productTotal" value="${list.productTotal}"/><br />
+                            <label for="productPrice">상품 가격</label><input type="number" class="content" name="productPrice" value="${list.productPrice }"><br>
+                            <label for="productImage">상품 이미지</label><input type="text" class="contentimg" name="productImage" value="${list.productImage}" ><br>
+                            <label for="productContent">상품 설명</label><input type="text"id="productContent" class="contentimg" name="productContent" value="${list.productContent}"><br>
+                             <input type="button" id="btn1" value="상품 설명 보기"><button id="btn2">수정하기</button>
+                             </form>
+                    	</div>
+                    </div>
+                    <div id="artcontainer">
                             <div class="info-modify">
-                                <div>
-                                <form action="${pageContext.request.contextPath}/viser/update">
-                                <label for="productName">변경할 상품 번호</label><input type="text" name="productId" value="${list.productId}" readonly><br>
-                                <label for="productName">상품명</label><input type="text" name="productName" value="${list.productName}"><br>
-                                <label for="productShop">상품샵</label><input type="text" name="productShop" value="${list.productShop}"><br>
-                                <label for="productImage">상품 이미지</label><input type="text" name="productImage" value="${list.productImage}" id="productImage"><br>
-                                <label for="productContent">상품 설명</label><input type="text" name="productContent" value="${list.productContent}"><br>
-                                <label for="productCategory">상품 카테고리</label><input type="text" name="productCategory" value="${list.productCategory}"><br>
-                                <label for="productTotal">상품 수량</label><input type="number" name="productTotal" value="${list.productTotal}"/><br />
-                                <label for="productPrice">상품 가격</label><input type="number" name="productPrice" value="${list.productPrice }"><br>
-                                <label for="productOpt">상품사이즈</label><input type="text" name="productOpt" value="${list.productOpt}"><br>
-                                
-                              <input type="button" id="btn1" value="이미지미리보기">
-                              
-                                <button id="btn2">수정하기</button>
-                            </div>
                                 <div class="img">
-                                    <img id="changeImg" src="" alt="" />
-                                     </div>
-                              
-                            </form>
-                            
+                                    <img id="changeImg" src="${pageContext.request.contextPath}/${list.productContent}" alt="" />
+                                </div>
                             </div>
-                            </div>
-                            </div>
+                        </div>
+            </div>
                          
                                 
-
+</main>
                                 
                             
              
@@ -358,10 +334,7 @@ height:32px;
 	
 	document.getElementById("btn1").addEventListener("click",function(e){
 		e.preventDefault;
-		 var img = document.getElementById("productImage").value;
-		document.getElementById("changeImg").src = img;
-		document.getElementById("changeImg").style.display ='block';
-		console.log(img);
+		document.getElementById("changeImg").classList.toggle("block");
 		
 	});
     </script>

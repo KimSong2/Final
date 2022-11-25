@@ -33,8 +33,9 @@
           <p>주소 : 서울특별시 구로구 구디동123-4</p>
         </li>
         <li>
-          <p><a href="${pageContext.request.contextPath}/question">문의하기</a> </p>
+          <p><a href="${pageContext.request.contextPath}/question" style="font-weight:bold;">문의하기&nbsp; ></a>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/usequestion/자주묻는질문" style="font-weight:bold;">자주 묻는 질문&nbsp; ></a> </p>
         </li>
+        
       </ul>
       <ul id="social">
         <li><a href="https://www.facebook.com" target='_blank'><img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt=""></a></li>

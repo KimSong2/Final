@@ -258,12 +258,17 @@ html {
 }
 #pageBtn button{
 width:30px;
+
 }
 #pageBtn{
 
 width:100%;
 text-align:center;
 	margin: 20px 0;
+}
+#pageBtn button:nth-child(1){
+background-color:#f5ebe0;
+color:black;
 }
 </style>
 </head>
@@ -430,7 +435,7 @@ text-align:center;
  				  	body:JSON.stringify({"id":id, "page":page, "pageCount":pageCount})
  				}).then((response) => response.json())
  				.then((data) => {
-					console.log(data);
+					
 	
 				var productListDiv= $("#tbody");
 					let a = 0;
@@ -459,13 +464,7 @@ text-align:center;
 					+"</tr>")
 					
 					}
-					function selectAll(selectAll)  {
-          		  		const checkboxes = document.getElementsByName('productIds');
-          		  
-          		  		checkboxes.forEach((checkbox) => {
-          		    		checkbox.checked = selectAll.checked;
-          		  		})
-          			}
+					
           		 
                 	var buttons = document.getElementsByClassName("deletewish");
                 	var orderbtns = document.getElementsByClassName("orderbtns");
@@ -559,7 +558,15 @@ text-align:center;
  				});
 			}
 		</script>
-			
+			<script>
+			function selectAll(selectAll)  {
+  		  		const checkboxes = document.getElementsByName('productIds');
+  		  
+  		  		checkboxes.forEach((checkbox) => {
+  		    		checkbox.checked = selectAll.checked;
+  		  		})
+  			}
+			</script>
 		
 </body>
 

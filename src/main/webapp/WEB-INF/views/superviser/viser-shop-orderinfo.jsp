@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/final/css/frame/main/footer.css">
-
-
 <title>Insert title here</title>
 <style>
 body{
@@ -117,13 +116,12 @@ height:50px;
 	text-align:center;
 }
 table{
-width:100%;
+width:80%;
 height:100px;
 font-size:12px;
 border:1px solid black;
- overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+
+
 }
 th,td{
 border:1px solid darkblue;
@@ -149,9 +147,13 @@ width:75px;
 height:75px;
 
 }
-
+.CSInfo{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .CSInfo h1{
-width:82%;
+width:100%;
 }
 #pid{
 border:none;
@@ -160,13 +162,28 @@ color:black;
 }
 .table{
 border-collapse:collapse;
-border:2px solid black;
+border:1px solid black;
 
+
+}
+.table tr> th:nth-child(2),.table tr> th:nth-child(4),.table tr> th:nth-child(9),.table tr> th:nth-child(11){
+	white-space: nowrap;
+}
+.table th{
+	padding:5px;
 }
 .h1{
 margin-left:20px;
 margin-top:20px;
 text-align:left;
+}
+#orderStatus{
+	background-color:white;
+	color: black;
+	border-radius:5px;
+	height:30px;
+	text-align:center;
+	
 }
 </style>
 
@@ -201,15 +218,16 @@ text-align:left;
 				<div class="grid-container">
 				<div class="CSInfo">
 				<h1 class="h1">배송 상태</h1>
-				<c:forEach var="list" items="${list}">
-				<form action="${pageContext.request.contextPath}/viser/CSOrderModify">
+				
+				
+				
 				<table class="table">
 				<tr>
-				<th>고유 번호</th>
+				<th>고객 번호</th>
 				<th>고객명</th>
 				<th>주소</th>
 				<th>우편번호</th>
-				<th>폰번호</th>
+				<th>핸드폰 번호</th>
 				<th>상품 고유 번호</th>
 				<th>상품 이름</th>
 				<th>상품 이미지</th>
@@ -217,10 +235,13 @@ text-align:left;
 				<th>상품 수량</th>
 				<th>가격 * 수량</th>
 				<th class="black">배송 상태</th>
-				<th>배송시 주의사항</th>
+				<th>배송시<br>주의사항</th>
 				<th class="black">배송 상태 수정</th>
 				</tr>
+				<c:forEach var="list" items="${list}">
+				<form action="${pageContext.request.contextPath}/viser/CSOrderModify">
 				<tr>
+				
 				<th>${list.id}</th>
 				<th>${list.receiverName}</th>
 				<th>${list.receiverAddress2}${list.receiverAddress3}</th>
@@ -228,20 +249,26 @@ text-align:left;
 				<th>${list.receiverPhone}</th>
 				<th><input type="text" name="productId" id="pid" value="${list.productId}"/></th>
 				<th>${list.productName}</th>
-				<th><img class="img" src="${list.productImage}/final" alt="" /></th>
-				<th>${list.productPrice}</th>
+				<th><img class="img" src="${pageContext.request.contextPath }/${list.productImage}" alt="" /></th>
+				<th><fmt:formatNumber value="${list.productPrice}" pattern="#,###" />원</th>
 				<th>${list.productCount}</th>
-				<th>${list.orderPrice}</th>
-				<th class="black"><input type="text" name="orderStatus" value="${list.orderStatus}" /></th>
-				<th>${list.orderMsg }</th>
+				<th><fmt:formatNumber value="${list.orderPrice}" pattern="#,###" />원</th>
+				<th class="black"><select name="orderStatus" id="orderStatus">
+			<option value="배송준비중">배송준비중</option>
+			<option value="배송중">배송중</option>
+			<option value="배송완료">배송완료</option>
+			</select></th></th>
+				<th>${list.orderMsg}</th>
 				<th class="black"><button>수정</button></th>
 				</tr>
 				</form>
+				</c:forEach>
+				
 				</table>
 			
-					
+				
 			
-				</c:forEach>
+				
 				</div>
 
 				</div>

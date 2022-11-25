@@ -117,12 +117,21 @@ border:1px solid black;
 width:80%;
 margin:0 auto;
 border-collapse:collapse;
-border:2px solid black;
+border:1px solid black;
 
+}
+.table td{
+	height:40px;
 }
 .h1{
 margin-left:20px;
 margin-top:20px;
+}
+#btn{
+	border:1px solid black;
+}
+#orderStatus{
+text-align:center;
 }
 </style>
 
@@ -157,14 +166,15 @@ margin-top:20px;
 			<h1 class="h1">고객 정보</h1>
 			<table class="table">
 			<tr>
-			<th>고유 아이디</th>
-			<th>고객명</th>
-			<th>고객 아이디</th>
+			<th>고유번호</th>
+			<th>권한</th>
+			<th>이름</th>
+			<th>아이디</th>
 			<th>주소</th>
 			<th>우편번호</th>
-			<th>폰번호</th>
+			<th>핸드폰번호</th>
 			<th>성별</th>
-			<th>관리자? 고객? Y==관리자</th>
+			
 			<th>배송상태</th>
 			<th>주문정보 들어가기</th>
 			</tr>
@@ -172,19 +182,20 @@ margin-top:20px;
 			<form action="${pageContext.request.contextPath}/viser/CSOrderInfo/${list.id}">
 			<tr>
 			<td>${list.id}</td>
+			<td><c:if test="${list.who=='admin'}">관리자</c:if><c:if test="${list.who=='member'}">고객</c:if></td>
 			<td>${list.memName}</td>
 			<td>${list.memId}</td>
 			<td>${list.memAddress}${list.memDetailaddress}</td>
 			<td>${list.memOaddress}</td>
 			<td>${list.memPhone}</td>
 			<td>${list.memGender }</td>
-			<td>${list.agree }</td>
+			
 			<th><select name="orderStatus" id="orderStatus">
 			<option value="배송준비중">배송준비중</option>
 			<option value="배송중">배송중</option>
 			<option value="배송완료">배송완료</option>
 			</select></th>
-			<td><button>click!</button></td>
+			<td><button id="btn">click!</button></td>
 		</tr>
 		</form>
 		</c:forEach>

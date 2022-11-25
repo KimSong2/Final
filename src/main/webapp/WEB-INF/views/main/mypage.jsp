@@ -247,7 +247,7 @@ text-align:center;
                             <div id="sec2-div1">
                                 <ul>
                                     <li id="li-1st" class="selected">주문내역조회( ${fn:length(list)})</li>
-                                    <li id="li-2nd">취소/반품/교환 내역(0)</li>
+                                    <li id="li-2nd">취소/반품/교환 내역( <span id="cancel-count">${fn:length(list1)}</span> )</li>
                                 </ul>
                             </div>
                             <div id="list">
@@ -498,8 +498,9 @@ text-align:center;
 					console.log(data);
 	
 				var productListDiv2= $("#tbody2");
-					
-				 	for(dict of data.list){
+				
+				document.getElementById("cancel-count").innerText = data.list1.length;
+				 	for(dict of data.list1){
 				 		const date = new Date(dict.order_date);
 				 		console.log(date.toLocaleString());
 				 			
